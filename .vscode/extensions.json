@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "stylelint.vscode-stylelint",
+    "vunguyentuan.vscode-css-variables",
+    "clinyong.vscode-css-modules",
+    "christian-kohler.path-intellisense"
+  ]
+}
