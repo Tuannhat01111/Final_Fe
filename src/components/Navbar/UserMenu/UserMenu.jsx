@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
 
-import { MenuItem } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { openLogin, openRegister } from "../../../redux/Modal/ModalSlice";
+import MenuItem from "./MenuItem";
 
 const Avatar = ({ src }) => {
   return (
@@ -21,8 +22,7 @@ const Avatar = ({ src }) => {
 
 const UserMenu = () => {
   const dropdownRef = useRef(null);
-  const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -41,6 +41,13 @@ const UserMenu = () => {
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value);
   }, []);
+
+  const loginModal = () => {
+    dispatch(openLogin());
+  };
+  const registerModal = () => {
+    dispatch(openRegister());
+  };
 
   return (
     <div className="relative flex items-center justify-center h-6 w-[20%]">
@@ -89,13 +96,19 @@ const UserMenu = () => {
         >
           <div className="flex flex-col cursor-pointer">
             <>
-              <MenuItem label="My Orders" onClick={() => navigate("/orders")} />
               <MenuItem
-                label="My Account"
-                onClick={() => navigate("/account-setting")}
+                label="Login"
+                onClick={() => {
+                  loginModal();
+                }}
               />
 
-              <MenuItem label="Logout" onClick={() => {}} />
+              <MenuItem
+                label="Sign up"
+                onClick={() => {
+                  registerModal();
+                }}
+              />
             </>
           </div>
         </div>

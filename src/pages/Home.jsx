@@ -1,4 +1,5 @@
 import { useState } from "react";
+import CategorySlide from "../components/CategorySlide/CategorySlide";
 import RoomItem from "../components/RoomItem/RoomItem";
 
 const room = [
@@ -23,7 +24,9 @@ const Home = () => {
   };
   return (
     <>
-      <div className="relative h-24 sm:h-20 z-10"></div>
+      <div className="relative h-24 sm:h-20 z-1">
+        <CategorySlide />
+      </div>
       <div className=" w-full sm:w-[90%] px-6 sm:mx-auto ">
         <div className=" pt-3  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8 transition-all duration-500 ">
           {room?.map((item) => {
