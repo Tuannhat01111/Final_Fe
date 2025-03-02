@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import { closeRegister, openLogin } from "../../redux/Modal/ModalSlice";
 import Modal from "./Modal";
+import { register } from "../../redux/Auth/AuthThunks";
 
 const validationSchema = yup.object({
   email: yup.string().email().required("Email is required"),
@@ -13,7 +14,7 @@ const validationSchema = yup.object({
 
 const RegisterModal = () => {
   const dispatch = useDispatch();
-
+  const {isLoading} = useSelector((state)  => state.auth)
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -22,7 +23,7 @@ const RegisterModal = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      console.log(values);
+      await dispatch(register(values)).unwrap();
       onClose();
     },
   });
@@ -114,6 +115,7 @@ const RegisterModal = () => {
 
   return (
     <Modal
+    disabled={isLoading}
       isOpen={open}
       title="Register"
       actionLabel="Sign In"
