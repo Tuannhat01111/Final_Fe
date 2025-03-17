@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { openLogin, openRegister } from "../../../redux/Modal/ModalSlice";
 import MenuItem from "./MenuItem";
+import { useNavigate } from "react-router";
+import { logOut } from "../../../redux/Auth/AuthSlice";
 
 const Avatar = ({ src }) => {
   return (
@@ -22,7 +24,12 @@ const Avatar = ({ src }) => {
 
 const UserMenu = () => {
   const dropdownRef = useRef(null);
+  const navigate = useNavigate()
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
+  const role = useSelector((state) => state.auth.role)
+  const avatarUrl = useSelector((state) => state.auth.avatarUrl)
+
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -32,9 +39,9 @@ const UserMenu = () => {
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -43,10 +50,14 @@ const UserMenu = () => {
   }, []);
 
   const loginModal = () => {
-    dispatch(openLogin());
+    dispatch(openLogin())
   };
   const registerModal = () => {
-    dispatch(openRegister());
+    dispatch(openRegister())
+  };
+
+  const logout = () => {
+    dispatch(logOut())
   };
 
   return (
@@ -95,21 +106,42 @@ const UserMenu = () => {
           "
         >
           <div className="flex flex-col cursor-pointer">
-            <>
-              <MenuItem
-                label="Login"
-                onClick={() => {
-                  loginModal();
-                }}
-              />
+          {isLoggedIn ? (
+              <>
+                {role == "Hotel Owner" && (
+                  <MenuItem
+                    label="Manage Rooms"
+                    onClick={() => navigate('/owner')}
+                  />
+                )}
+                <MenuItem
+                  label="My Orders"
+                  onClick={() => navigate('/orders')}
+                />
+                <MenuItem
+                  label="My Account"
+                  onClick={() => navigate('/account-setting')}
+                />
 
-              <MenuItem
-                label="Sign up"
-                onClick={() => {
-                  registerModal();
-                }}
-              />
-            </>
+                <MenuItem
+                  label="Logout"
+                  onClick={() => { logout() }}
+                />
+              </>
+            ) : (
+              <>
+                <MenuItem
+                  label="Login"
+                  onClick={() => { loginModal() }}
+                />
+
+                <MenuItem
+                  label="Sign up"
+                  onClick={() => { registerModal() }}
+                />
+
+              </>
+            )}
           </div>
         </div>
       )}

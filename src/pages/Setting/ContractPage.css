@@ -1,0 +1,31 @@
+.contract-page {
+    font-family: Arial, sans-serif;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    /* max-width: 800px;
+    margin: 0 auto;
+    padding: 20px; */
+}
+
+.contract-details {
+    margin-bottom: 20px;
+}
+
+.contract-details h2 {
+    color: #333;
+    font-size: 1.2em;
+}
+
+.contract-details h3 {
+    color: #666;
+    font-size: 1.1em;
+}
+
+.party {
+    margin-bottom: 10px;
+}
+
+.signatures {
+    margin-top: 20px;
+    font-style: italic;
+}
+    
