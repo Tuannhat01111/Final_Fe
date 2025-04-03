@@ -100,7 +100,7 @@ const UpdateProfile = () => {
                         </div>
                         <div className='flex flex-col gap-8'>
                             <div class="w-full">
-                                <label for="fullName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                                <label for="fullName" class="block mb-2 text-sm font-medium text-gray-900">Name</label>
                                 <TextField fullWidth id="outlined-basic" variant="outlined"
                                     name="fullName"
                                     value={formik.values.fullName}
@@ -112,7 +112,7 @@ const UpdateProfile = () => {
                             </div>
 
                             <div class="w-full">
-                                <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone</label>
+                                <label for="phone" class="block mb-2 text-sm font-medium text-gray-900">Phone</label>
                                 <TextField fullWidth id="outlined-basic" variant="outlined"
                                     name="phone"
                                     value={formik.values.phone}
@@ -124,7 +124,7 @@ const UpdateProfile = () => {
                             </div>
 
                             <div class="w-full">
-                                <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
+                                <label for="address" class="block mb-2 text-sm font-medium text-gray-900">Address</label>
                                 <TextField fullWidth id="outlined-basic" variant="outlined"
                                     name="address"
                                     value={formik.values.address}
@@ -164,10 +164,7 @@ const UpdateProfile = () => {
                                 Save Change
                             </Button>
                         </div> */}
-
-                    </div>
-                </div>
-                <div className="flex justify-center mt-12">
+ <div className="flex justify-center mt-12">
                     <Button
                         type="submit"
                         variant="outlined"
@@ -182,6 +179,10 @@ const UpdateProfile = () => {
                         Save Change
                     </Button>
                 </div>
+                    </div>
+                    
+                </div>
+               
             </div>
 
 

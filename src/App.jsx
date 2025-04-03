@@ -10,7 +10,8 @@ import Security from "./pages/Setting/ChangePassword";
 import ContractPage from "./pages/Setting/ContractPage";
 import ProfilePage from "./pages/Setting/Profile";
 import UpdateProfile from "./pages/Setting/UpdateProfile"
-
+import ManagerUser from "./pages/HomeAdmin/ManageUser/ManageUser"
+import ManageCategories from "./pages/HomeAdmin/ManageCategories/ManageCategory"
 function App() {
   return (
     <>
@@ -24,6 +25,18 @@ function App() {
               index path=""
               element={
                   <Dashboard />
+              }
+            />
+                        <Route
+              path="categories"
+              element={
+                  <ManageCategories />
+              }
+            />
+            <Route
+              path="users"
+              element={
+                  <ManagerUser />
               }
             />
           </Route>

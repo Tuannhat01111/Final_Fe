@@ -70,7 +70,7 @@ useEffect(() => {
                             </div>
                             <div className="party">
                                 <h3>Bên B:</h3>
-                                <p>Tên:  EarthBNB</p>
+                                <p>Tên:  DBN</p>
                                 <p>Địa chỉ: Hải châu, Đà Nẵng, Việt nam</p>
                                 <p>Số điện thoại: 09999999999</p>
                             </div>
@@ -132,7 +132,7 @@ useEffect(() => {
                         </div>
                         <div className='flex flex-row w-full justify-center'>
 
-                        <button className='mt-4 bg-primary hover:bg-primary hover:opacity-85 py-1 rounded-lg text-white w-1/5' onClick={handleSubmit}>Submit</button>
+                        <button className='mt-4 bg-primary hover:bg-primary hover:opacity-85 py-1 rounded-lg text-dark w-1/5' onClick={handleSubmit}>Submit</button>
                         </div>
 
                     </div>
