@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 import CategorySlide from "../components/CategorySlide/CategorySlide";
 import RoomItem from "../components/RoomItem/RoomItem";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllRooms } from "../redux/room/roomThunks";
 
 const room = [
   {
@@ -22,6 +25,13 @@ const Home = () => {
   const favoriteButton = () => {
     setFavorite(!favorite);
   };
+  const dispatch = useDispatch()
+  const { room } = useSelector((state) => state.room)
+
+  useEffect(() => {
+      dispatch(getAllRooms())
+  }, [])
+
   return (
     <>
       <div className="relative h-24 sm:h-20 z-1">

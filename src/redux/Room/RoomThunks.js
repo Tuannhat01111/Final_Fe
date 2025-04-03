@@ -82,9 +82,10 @@ export const getRoomOrdersStatsById = createAsyncThunk('room/getRoomOrdersStatsB
 
 export const createRoom = createAsyncThunk('room/createRoom', async(data, thunkApi)=>{
     try {
+        console.log("first")
         const {name, street, country, codeCountry, city, codeCity, description, district, email, userId, categoryId, files, price} = data 
-        const longitudeAndLatitude = await  getLongitudeAndLatitudeByAddress(street, city, country)
-        const response1 = await http.post(`api/Rooms/`,{categoryId: categoryId, userId: userId,  name:name, street:street, city:city, country:country, description:description, district:district, email:email, latitude:`${longitudeAndLatitude.latitude}`, longitude:`${longitudeAndLatitude.longitude}`, price:price})
+        // const longitudeAndLatitude = await  getLongitudeAndLatitudeByAddress(street, city, country)
+        const response1 = await http.post(`api/Rooms/`,{categoryId: categoryId, userId: userId,  name:name, street:street, city:city, country:country, description:description, district:district, email:email, latitude:"123", longitude:"123", price:price})
 
         const response2 = await http.get(`api/Rooms/PreSignUrlToUploadImage/${response1.id}/${data.files.length}`)
   

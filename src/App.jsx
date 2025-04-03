@@ -11,7 +11,12 @@ import ContractPage from "./pages/Setting/ContractPage";
 import ProfilePage from "./pages/Setting/Profile";
 import UpdateProfile from "./pages/Setting/UpdateProfile"
 import ManagerUser from "./pages/HomeAdmin/ManageUser/ManageUser"
+import Details from "./pages/Room/Details"
 import ManageCategories from "./pages/HomeAdmin/ManageCategories/ManageCategory"
+import OwnerPage from "./pages/HomeOwner/OwnerPage";
+import CreateRoom from "./pages/Room/CreateRoom";
+
+
 function App() {
   return (
     <>
@@ -20,6 +25,28 @@ function App() {
       <RegisterModal />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route
+            path="/details/:id"
+            element={
+                <Details />
+            }
+          />
+             <Route
+            path="/owner"
+            element={
+
+                <OwnerPage />
+    
+            }
+          />
+          <Route
+            path="/createRoom"
+            element={
+           
+                <CreateRoom />
+         
+            }
+          />
         <Route path='admin' element={<HomeAdmin />} >
             <Route
               index path=""

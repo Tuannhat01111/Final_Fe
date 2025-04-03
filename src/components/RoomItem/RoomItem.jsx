@@ -7,7 +7,7 @@ const RoomItem = ({ data, isFavorite, btn }) => {
       <div className="col-span-1 p-0 cursor-pointer group ">
         <div className="flex flex-col w-full my-2">
           <Link
-            // to={`/details/${data?.id}`}
+            to={`/details/${data?.id}`}
             className="aspect-square w-full relative overflow-hidden rounded-xl bg-black"
           >
             <img
