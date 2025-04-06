@@ -66,23 +66,13 @@ const ManageCategories = () => {
 
 
     const showConfirm = (id) => {
-        
-        confirm({
-            title: 'Do you want to delete these items?',
-            icon: <ExclamationCircleFilled />,
-            content: 'Some descriptions',
-            okButtonProps:{
-                style:{
-                    backgroundColor: 'red'
-                }
-            },
-            onOk() {
-                dispatch(deleteCategory(id))
-            },
-            onCancel() {
-                console.log('Cancel');
-            },
-        });
+        const confirmed = window.confirm('Do you want to delete these items?');
+
+        if (confirmed) {
+            dispatch(deleteCategory(id));
+        } else {
+            console.log('Cancel');
+        }
     };
 
     useEffect(() => {

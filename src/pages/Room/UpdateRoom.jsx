@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 import './CreateRoom.css';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCategory } from "../../redux/category/categoryThunk";
-import {  getRoomById, updateRoom } from "../../redux/room/roomThunks";
+import { getAllCategory } from "../../redux/category/categoryThunks";
+import { getRoomById, updateRoom, deleteRoomImages } from "../../redux/room/roomThunks";
 import { jwtDecode } from "jwt-decode";
 import * as yup from "yup";
 import { Autocomplete, TextField, Button } from '@mui/material';
@@ -28,12 +25,7 @@ const UpdateRoom = () => {
         dispatch(getRoomById({ id: id }))
         dispatch(getAllCategory())
     }, [])
-    const  details  = useSelector((state) => state.room.details)
-    const [description, setDescription] = useState('');
-    const handleEditorChange = (content) => {
-        setDescription(content);
-        formik.setFieldValue('description', content);
-    };
+    const details = useSelector((state) => state.room.details)
     const user = jwtDecode(localStorage.getItem('token'))
     const formik = useFormik({
         initialValues: {
@@ -76,11 +68,10 @@ const UpdateRoom = () => {
                 latitude: details.latitude || "",
                 longitude: details.longitude || "",
                 categoryId: details.categoryId || "",
-                files: details.files || "",
+                files: Array.isArray(details.files) ? details.files : [],  // Ensuring it's an array
                 price: details.price || "",
                 userId: user?.UserId,
             });
-            setDescription(details.description);
             setImagesUpload(details.roomImages);
         }
     }, [details]);
@@ -130,6 +121,7 @@ const UpdateRoom = () => {
     const [imagesUpload, setImagesUpload] = useState([]);
 
     const handleFile = (event) => {
+        console.log("first")
         const file = event.target.files[0];
 
         if (file) {
@@ -138,9 +130,11 @@ const UpdateRoom = () => {
         }
 
     };
-    const removeImage = (i) => {
-        formik.setFieldValue('files', formik.values.files.filter(x => x.name !== i));
-        setImagesUpload(imagesUpload.filter(x => x.name !== i));
+    const removeImage = (key, i) => {
+        console.log(key)
+        formik.setFieldValue('files', formik.values.files.filter(x => x.url !== i));
+        setImagesUpload(imagesUpload.filter(x => x.url !== i));
+        dispatch(deleteRoomImages(key))
 
     };
     const handleCategoryChange = (event, newValue) => {
@@ -152,13 +146,13 @@ const UpdateRoom = () => {
     };
     return (
         <>
-            <div> <section class="bg-white dark:bg-gray-900">
+            <div> <section class="bg-white">
                 <div class="py-8 px-4  lg:py-16">
                     <div className="flex w-[90%] mx-auto">
                         <div class="w-[50%] grid gap-4 sm:grid-cols-2 sm:gap-6 px-6">
-                            <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Modify your room</h2>
+                            <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-dark">Modify your room</h2>
                             <div class="sm:col-span-2">
-                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Name</label>
+                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-dark">Product Name</label>
                                 <TextField fullWidth id="outlined-basic" variant="outlined"
                                     name="name"
 
@@ -173,7 +167,7 @@ const UpdateRoom = () => {
                             </div>
 
                             <div>
-                                <label for="categoryId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+                                <label for="categoryId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-dark">Category</label>
                                 <Autocomplete
                                     fullWidth
                                     disablePortal
@@ -186,7 +180,7 @@ const UpdateRoom = () => {
                                 />
                             </div>
                             <div class="w-full">
-                                <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
+                                <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-dark">Price</label>
                                 <TextField fullWidth id="outlined-basic" variant="outlined"
                                     name="price"
                                     value={formik.values.price}
@@ -196,7 +190,7 @@ const UpdateRoom = () => {
                             </div>
 
                             <div>
-                                <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Country</label>
+                                <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-dark">Country</label>
                                 <Autocomplete
                                     value={selectedCountry}
                                     onChange={handleCountryChange}
@@ -211,7 +205,7 @@ const UpdateRoom = () => {
 
                             </div>
                             <div>
-                                <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">State (City)</label>
+                                <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-dark">State (City)</label>
                                 <Autocomplete fullWidth
                                     disablePortal
                                     id="combo-div-demo"
@@ -227,7 +221,7 @@ const UpdateRoom = () => {
                                 />
                             </div>
                             <div class="sm:col-span-2">
-                                <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Street</label>
+                                <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-dark">Street</label>
                                 <TextField fullWidth id="outlined-basic" variant="outlined" name="street"
                                     value={formik.values.street}
                                     onChange={formik.handleChange}
@@ -239,16 +233,16 @@ const UpdateRoom = () => {
                                     }} />
                             </div>
                             <div class="sm:col-span-2">
-                                <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-
-                                <div className='editor'>
-                                    <ReactQuill theme="snow"
-                                        value={description}
-                                        onChange={handleEditorChange}
-                                        className="editor-input"
-                                        style={{ height: "200px", marginBottom: "50px" }}
-                                    />
-                                </div>
+                                <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-dark">Description</label>
+                                <TextField fullWidth id="outlined-basic" variant="outlined" name="description"
+                                    value={formik.values.description}
+                                    onChange={formik.handleChange}
+                                    error={formik.touched.description && Boolean(formik.errors.description)}
+                                    helperText={formik.touched.description && formik.errors.description}
+                                    style={{
+                                        marginBottom: "10px",
+                                        display: "inline-grid",
+                                    }} />
                             </div>
                         </div>
                         <div className="w-[50%] px-6 mt-[6%]">
@@ -268,8 +262,14 @@ const UpdateRoom = () => {
                                 {imagesUpload?.map((file, key) => {
                                     return (
                                         <div key={key} className="overflow-hidden relative">
-                                            <i onClick={() => { removeImage(file.url) }} className="mdi mdi-close absolute right-1 hover:text-white cursor-pointer">X</i>
-                                            <img className="h-40 w-40 rounded-md" src={file.url} />
+                                            <i onClick={() => { removeImage(file.id, file.url) }} className="mdi mdi-close absolute right-1 hover:text-white cursor-pointer">X</i>
+                                            {
+                                                        file.url ? (
+                                                            <img className="h-40 w-40 rounded-md" src={file.url} />
+                                                        ) : (
+                                                            <img className="h-40 w-40 rounded-md" src={URL.createObjectURL(file)} />
+                                                        )
+                                                    }
                                         </div>
                                     )
                                 })}

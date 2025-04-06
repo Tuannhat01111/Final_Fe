@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { getAllCategory } from "../../redux/category/categoryThunks";
 import {
   TbAnchor,
   TbBackpack,
@@ -72,14 +75,10 @@ const icons = [
   TbGasStation,
 ];
 
-const categories = [
-  {
-    id: "1",
-    name: "Beach",
-  },
-];
 
 const CategorySlide = () => {
+      const dispatch = useDispatch();
+  
   const [activeCategory, setActiveCategory] = useState(null);
   const [isAtTop, setIsAtTop] = useState(false);
   useEffect(() => {
@@ -91,12 +90,19 @@ const CategorySlide = () => {
       }
     };
 
+
+
     window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+ const { categories } = useSelector((state) => state.category)
+  useEffect(() => {
+    dispatch(getAllCategory())
+  }, [])
   const handleClickCategory = (id) => {
     setActiveCategory(id);
     console.log("click Cateogyrt", id);
@@ -104,9 +110,8 @@ const CategorySlide = () => {
   return (
     <>
       <div
-        className={`fixed h-20 w-full z-10 bg-white ${
-          !isAtTop ? "" : "border-b border-b-gray-200 "
-        } `}
+        className={`fixed h-20 w-full z-10 bg-white ${!isAtTop ? "" : "border-b border-b-gray-200 "
+          } `}
       >
         <div className="flex overflow-hidden overflow-x-auto py-4 flex-row items-center md:items-start md:justify-start justify-center mx-2 px-4  sm:py-2  sm:px-6 gap-0 lg:gap-8 scrollable-div ">
           {categories?.map((item, index) => {
@@ -121,9 +126,8 @@ const CategorySlide = () => {
                 >
                   {Icon && <Icon className="pt-1" size={30} color="" />}
                   <h1
-                    className={`${
-                      item?.id === activeCategory ? "" : ""
-                    } text-sm`}
+                    className={`${item?.id === activeCategory ? "" : ""
+                      } text-sm`}
                   >
                     {item?.name}
                   </h1>

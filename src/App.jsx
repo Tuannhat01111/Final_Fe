@@ -15,6 +15,8 @@ import Details from "./pages/Room/Details"
 import ManageCategories from "./pages/HomeAdmin/ManageCategories/ManageCategory"
 import OwnerPage from "./pages/HomeOwner/OwnerPage";
 import CreateRoom from "./pages/Room/CreateRoom";
+import UpdateRoom from './pages/Room/UpdateRoom';
+
 
 
 function App() {
@@ -37,6 +39,12 @@ function App() {
 
                 <OwnerPage />
     
+            }
+          />
+          <Route
+            path="/editRoom/:id"
+            element={
+                <UpdateRoom />
             }
           />
           <Route

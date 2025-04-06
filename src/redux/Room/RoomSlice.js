@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createRoom, deleteRoom, getAllRooms, getRoomById, updateRoom, getRoomOrdersStats, getRoomOrdersStatsById, sendFeedback, sendFeedbackByEmail, getRoomByOwnerHotel } from "./RoomThunks";
+import { createRoom, deleteRoom, getAllRooms, getRoomById, updateRoom, getRoomOrdersStats, getRoomOrdersStatsById, sendFeedback,deleteRoomImages, sendFeedbackByEmail, getRoomByOwnerHotel } from "./RoomThunks";
 
 
 
@@ -158,6 +158,20 @@ const roomSlice = createSlice({
             state.loading= false
             state.error = action.payload
         })
+        builder.addCase(deleteRoomImages.pending,(state,action)=>{
+            state.loading = true
+            state.error = ''
+        })
+        builder.addCase(deleteRoomImages.fulfilled, (state, action) =>{
+            state.loading=false
+            state.room = action.payload
+            state.error = ''
+        })
+        builder.addCase(deleteRoomImages.rejected, (state,action) =>{
+            state.loading= false
+            state.error = action.payload
+        })
+        
     }
    
 });

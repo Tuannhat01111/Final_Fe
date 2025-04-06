@@ -45,7 +45,7 @@ function ListRoomInHotelOwner({ rooms }) {
 
             <p className="flex items-center gap-5 text-gray-800">
               <img src="/pin.png" alt="" className="w-4 h-4" />
-              <span>{item?.address}</span>
+              <span>{item?.street}</span>
 
             </p>
             <div className="line-clamp-3 pr-12 text-justify" dangerouslySetInnerHTML={{ __html: item?.description }}></div>

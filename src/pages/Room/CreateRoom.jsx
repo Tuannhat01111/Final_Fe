@@ -107,9 +107,7 @@ const CreateRoom = () => {
 
     };
 
-    const asd = () => {
-        console.log("first")
-    };
+
     const handleCategoryChange = (event, newValue) => {
         if (newValue) {
             formik.setFieldValue('categoryId', newValue.id);
