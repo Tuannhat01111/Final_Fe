@@ -3,7 +3,7 @@ import { TextField } from "@mui/material";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
-import { closeLogin, openRegister } from "../../redux/Modal/ModalSlice";
+import { closeLogin, openRegister, openForgetPassword } from "../../redux/Modal/ModalSlice";
 import Modal from "./Modal";
 import { login } from "../../redux/Auth/AuthThunks";
 
@@ -40,6 +40,8 @@ const LoginModal = () => {
 
   const openForgetHandler = () => {
     dispatch(closeLogin());
+    dispatch(openForgetPassword())
+
   };
 
   const bodyContent = (

@@ -122,7 +122,7 @@ const Navbar = () => {
               size={40}
             />
             <h1 className="text-primary text-lg font-semibold font-circular pl-3">
-              EarthPnP
+              DBNTravel
             </h1>
           </div>
           <div className="flex items-center justify-center w-full">

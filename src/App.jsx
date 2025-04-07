@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import LoginModal from "./components/Modal/LoginModal";
 import RegisterModal from "./components/Modal/RegisterModal";
+import ForgetPassword from "./components/Modal/ForgetPassword";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home";
 import Dashboard from "./pages/HomeAdmin/Dashboard/Dashboard";
@@ -24,6 +25,8 @@ function App() {
     <>
       <Navbar />
       <LoginModal />
+      <ForgetPassword />
+
       <RegisterModal />
       <Routes>
         <Route path="/" element={<Home />} />

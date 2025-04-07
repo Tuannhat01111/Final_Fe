@@ -149,7 +149,7 @@ const UpdateProfile = () => {
                                     value={description}
                                     onChange={handleEditorChange}
                                     className="editor-input h-full editor-quill"
-                                    style={{ borderRadius: 5 }}
+                                    style={{ borderRadius: 5, height: "300px", marginBottom: "50px"  }}
                                 // style={{ height: "600px", marginBottom: "50px" }}
                                 />
                             </div>

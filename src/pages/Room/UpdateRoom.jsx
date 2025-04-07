@@ -9,10 +9,11 @@ import * as yup from "yup";
 import { Autocomplete, TextField, Button } from '@mui/material';
 import { Country, State } from 'country-state-city';
 import { useParams } from 'react-router-dom';
+import ReactQuill from 'react-quill-new';
 
 const validationSchema = yup.object({
     name: yup.string().required("Name is required"),
-    description: yup.string().required("description is required"),
+    // description: yup.string().required("description is required"),
     street: yup.string().required("street is required"),
     price: yup.number().required("price is required"),
 });
@@ -20,7 +21,11 @@ const validationSchema = yup.object({
 const UpdateRoom = () => {
     const dispatch = useDispatch();
     const { id } = useParams()
-
+    const [description, setDescription] = useState('');
+    const handleEditorChange = (content) => {
+        setDescription(content);
+        formik.setFieldValue('description', content);
+    };
     useEffect(() => {
         dispatch(getRoomById({ id: id }))
         dispatch(getAllCategory())
@@ -72,6 +77,8 @@ const UpdateRoom = () => {
                 price: details.price || "",
                 userId: user?.UserId,
             });
+            setDescription(details.description);
+
             setImagesUpload(details.roomImages);
         }
     }, [details]);
@@ -234,15 +241,14 @@ const UpdateRoom = () => {
                             </div>
                             <div class="sm:col-span-2">
                                 <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-dark">Description</label>
-                                <TextField fullWidth id="outlined-basic" variant="outlined" name="description"
-                                    value={formik.values.description}
-                                    onChange={formik.handleChange}
-                                    error={formik.touched.description && Boolean(formik.errors.description)}
-                                    helperText={formik.touched.description && formik.errors.description}
-                                    style={{
-                                        marginBottom: "10px",
-                                        display: "inline-grid",
-                                    }} />
+                                <div className='editor'>
+                                    <ReactQuill theme="snow"
+                                        value={description}
+                                        onChange={handleEditorChange}
+                                        className="editor-input h-full editor-quill"
+                                        style={{ borderRadius: 5, height: "300px", marginBottom: "50px" }}
+                                    />
+                                </div>
                             </div>
                         </div>
                         <div className="w-[50%] px-6 mt-[6%]">
@@ -264,12 +270,12 @@ const UpdateRoom = () => {
                                         <div key={key} className="overflow-hidden relative">
                                             <i onClick={() => { removeImage(file.id, file.url) }} className="mdi mdi-close absolute right-1 hover:text-white cursor-pointer">X</i>
                                             {
-                                                        file.url ? (
-                                                            <img className="h-40 w-40 rounded-md" src={file.url} />
-                                                        ) : (
-                                                            <img className="h-40 w-40 rounded-md" src={URL.createObjectURL(file)} />
-                                                        )
-                                                    }
+                                                file.url ? (
+                                                    <img className="h-40 w-40 rounded-md" src={file.url} />
+                                                ) : (
+                                                    <img className="h-40 w-40 rounded-md" src={URL.createObjectURL(file)} />
+                                                )
+                                            }
                                         </div>
                                     )
                                 })}

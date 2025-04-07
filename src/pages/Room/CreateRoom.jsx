@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import ReactQuill from 'react-quill';
+import ReactQuill from 'react-quill-new';
 import 'react-quill/dist/quill.snow.css';
 import './CreateRoom.css';
 import { useFormik } from 'formik';
@@ -14,7 +13,6 @@ import { Country, State } from 'country-state-city';
 
 const validationSchema = yup.object({
     name: yup.string().required("Name is required"),
-    description: yup.string().required("description is required"),
     street: yup.string().required("street is required"),
     city: yup.string().required("city is required"),
     country: yup.string().required("country is required"),
@@ -47,7 +45,11 @@ const CreateRoom = () => {
 
         }
     });
-
+    const [description, setDescription] = useState('');
+    const handleEditorChange = (content) => {
+        setDescription(content);
+        formik.setFieldValue('description', content);
+    };
     const [selectedCountry, setSelectedCountry] = useState(Country.getAllCountries()[0] ? {
         label: `${Country.getAllCountries()[0].name} (${Country.getAllCountries()[0].isoCode})`,
         isoCode: Country.getAllCountries()[0].isoCode,
@@ -222,15 +224,14 @@ const CreateRoom = () => {
                                     </div>
                                     <div class="sm:col-span-2">
                                         <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-dark">Description</label>
-                                        <TextField fullWidth id="outlined-basic" variant="outlined" name="description"
-                                            value={formik.values.description}
-                                            onChange={formik.handleChange}
-                                            error={formik.touched.description && Boolean(formik.errors.description)}
-                                            helperText={formik.touched.description && formik.errors.description}
-                                            style={{
-                                                marginBottom: "10px",
-                                                display: "inline-grid",
-                                            }} />
+                                        <div className='editor'>
+                                            <ReactQuill theme="snow"
+                                                value={description}
+                                                onChange={handleEditorChange}
+                                                className="editor-input h-full editor-quill"
+                                                style={{ borderRadius: 5, height: "300px", marginBottom: "50px" }}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="w-[50%] px-6 mt-[6%]">

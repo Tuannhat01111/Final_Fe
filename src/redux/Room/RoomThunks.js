@@ -156,9 +156,9 @@ export const deleteRoomImages = createAsyncThunk('room/deleteRoomImages', async 
 
 
 export const sendFeedback = createAsyncThunk('room/sendFeedback', async (data, thunkApi) => {
-    const { roomId } = data
+    const { id } = data
     try {
-        const reponse = await http.post(`api/Rooms/SendFeedback/${roomId}`, data)
+        const reponse = await http.post(`api/Rooms/SendFeedback/${id}`, data)
         thunkApi.dispatch(openMessage({ message: "Send feedback successfully !", notificationType: 'success' }))
 
         return reponse
