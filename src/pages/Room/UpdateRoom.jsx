@@ -43,7 +43,7 @@ const UpdateRoom = () => {
             codeCity: '',
             description: '',
             district: '',
-            email: user?.UserName,
+            email: user?.Email,
             latitude: '',
             longitude: '',
             userId: user?.UserId,

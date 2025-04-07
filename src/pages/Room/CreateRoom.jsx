@@ -31,7 +31,7 @@ const CreateRoom = () => {
             codeCity: '',
             description: '',
             district: '',
-            email: user?.UserName,
+            email: user?.Email,
             userId: user?.UserId,
             categoryId: '',
             files: [],

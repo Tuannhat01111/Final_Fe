@@ -17,6 +17,8 @@ import ManageCategories from "./pages/HomeAdmin/ManageCategories/ManageCategory"
 import OwnerPage from "./pages/HomeOwner/OwnerPage";
 import CreateRoom from "./pages/Room/CreateRoom";
 import UpdateRoom from './pages/Room/UpdateRoom';
+import ToastNotification from './components/toast/ToastNotification';
+
 
 
 
@@ -26,7 +28,7 @@ function App() {
       <Navbar />
       <LoginModal />
       <ForgetPassword />
-
+      <ToastNotification />
       <RegisterModal />
       <Routes>
         <Route path="/" element={<Home />} />
