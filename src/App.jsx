@@ -18,6 +18,9 @@ import OwnerPage from "./pages/HomeOwner/OwnerPage";
 import CreateRoom from "./pages/Room/CreateRoom";
 import UpdateRoom from './pages/Room/UpdateRoom';
 import ToastNotification from './components/toast/ToastNotification';
+import ListOrder from './pages/Orders/ListOrder';
+import CheckoutOrder from './pages/Orders/CheckoutOrder';
+
 
 
 
@@ -44,6 +47,12 @@ function App() {
 
                 <OwnerPage />
     
+            }
+          />
+          <Route
+            path="/order/:id"
+            element={
+                <CheckoutOrder />
             }
           />
           <Route

@@ -204,15 +204,15 @@ const Details = () => {
                         <div className="hidden lg:flex  lg:w-1/3  lg:justify-end  ">
                             <div
                                 className=
-                                "hidden w-[80%] lg:flex flex-col border border-gray-200 py-4 px-4 rounded-lg shadow-2xl sm:max-h-[40vh]  lg:max-h-[30vh] sm:sticky sm:top-20 lg:top-44 object-cover"
+                                "hidden w-[80%] lg:flex flex-col border border-gray-200 py-4 px-4 rounded-lg shadow-2xl sm:max-h-[90vh]  lg:max-h-[35vh] sm:sticky sm:top-20 lg:top-44 object-cover"
                             >
                                 <div className="flex flex-row items-center">
-                                    <h1 className="font-bold text-2xl">{details?.price}</h1>
+                                    <h1 className="font-bold text-2xl">${details?.price}</h1>
                                     <h1>/night</h1>
                                 </div>
                                 <span className="py-2">
                                     {/* <Link to={`/order/${id}`}> */}
-                                    <button className="flex py-2 border border-none justify-center items-center w-full rounded-lg bg-primary text-white" onClick={() => { handleSubmit() }}>
+                                    <button className="bg-blue-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full justify-center items-center w-full" onClick={() => { handleSubmit() }}>
                                         Booking
                                     </button><i className="fas fa-eye  ms-2"></i>
                                     {/* </Link> */}
@@ -221,7 +221,7 @@ const Details = () => {
 
                                 <div className="flex py-2 justify-between">
                                     <h1 className="underline">${details?.price} x {diffDay} day</h1>
-                                    <h1>{totalPrice}</h1>
+                                    <h1>${totalPrice}</h1>
                                 </div>
 
                                 <div className="flex py-2 justify-between">

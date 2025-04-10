@@ -1,0 +1,84 @@
+/* styles.css */
+
+/* CSS cho phần tử card */
+.card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+  }
+  
+  /* CSS cho phần tử card-body */
+  .card-body {
+    padding: 1rem;
+  }
+  
+  /* CSS cho phần tử d-flex */
+  .d-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* CSS cho phần tử align-items-center */
+  .align-items-center {
+    align-items: center;
+  }
+  
+  /* CSS cho phần tử rounded-circle */
+  .rounded-circle {
+    border-radius: 50%;
+  }
+  
+  /* CSS cho phần tử ms-3 (margin-left: 0.75rem) */
+  .ms-3 {
+    margin-left: 0.75rem;
+  }
+  
+  /* CSS cho phần tử fw-bold (font-weight: bold) */
+  .fw-bold {
+    font-weight: bold;
+  }
+  
+  /* CSS cho phần tử text-muted (màu chữ xám) */
+  .text-muted {
+    color: #6c757d;
+  }
+  
+  /* CSS cho phần tử badge */
+  .badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 50px;
+    font-size: 14px;
+  }
+  
+  /* CSS cho phần tử badge-warning */
+  .badge-warning {
+    background-color: #ffc107;
+    color: #000;
+  }
+  
+  /* CSS cho phần tử card-footer */
+  .card-footer {
+    border: 0;
+    background-color: #f8f9fa;
+    padding: 0.5rem 0;
+  }
+  
+  /* CSS cho phần tử btn-link (button giống link) */
+  .btn-link {
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  /* CSS cho hiệu ứng ripple */
+  .btn-link:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
