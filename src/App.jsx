@@ -18,110 +18,173 @@ import OwnerPage from "./pages/HomeOwner/OwnerPage";
 import CreateRoom from "./pages/Room/CreateRoom";
 import UpdateRoom from './pages/Room/UpdateRoom';
 import ToastNotification from './components/toast/ToastNotification';
-import ListOrder from './pages/Orders/ListOrder';
 import CheckoutOrder from './pages/Orders/CheckoutOrder';
+import ListOrder from './pages/Orders/ListOrder';
+import ManagerOwner from './pages/HomeAdmin/ManageOwner/ManageOwner';
+import PublicElement from './components/commonAuth/PublicElement';
+import HotelOwnerElement from './components/commonAuth/HotelOwnerElement';
+import AdminElement from './components/commonAuth/AdminElement';
 
 
 
 
 
 function App() {
+  const currentPath = window.location.pathname.split('/');
+
   return (
     <>
-      <Navbar />
+      {currentPath[1] === "admin" ? (
+        <>
+        </>
+      ) : (
+        <div className={currentPath[1] === "admin" ? '' : ' max-md:h-14 md:h-16 relative '} style={{ padding: '0px', margin: '0px' }}>
+          <div className={currentPath[1] === "admin" ? '' : 'fixed top-0 w-full z-50'}>
+            <Navbar />
+          </div>
+        </div>
+      )}
+
       <LoginModal />
       <ForgetPassword />
       <ToastNotification />
       <RegisterModal />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={
+          <PublicElement>
+            <Home />
+          </PublicElement>
+        }
+        />
         <Route
-            path="/details/:id"
-            element={
-                <Details />
-            }
-          />
-             <Route
-            path="/owner"
-            element={
+          path="/details/:id"
+          element={
+            <PublicElement>
+              <Details />
+            </PublicElement>
+          }
+        />
+        <Route
+          path="/owner"
+          element={
 
-                <OwnerPage />
-    
-            }
-          />
-          <Route
-            path="/order/:id"
-            element={
-                <CheckoutOrder />
-            }
-          />
-          <Route
-            path="/editRoom/:id"
-            element={
-                <UpdateRoom />
-            }
-          />
-          <Route
-            path="/createRoom"
-            element={
-           
-                <CreateRoom />
-         
-            }
-          />
+            <HotelOwnerElement>
+              <OwnerPage />
+            </HotelOwnerElement>
+
+          }
+        />
+        <Route
+          path="/order/:id"
+          element={
+            <PublicElement>
+              <CheckoutOrder />
+            </PublicElement>
+          }
+        />
+        <Route
+          path="/orders"
+          element={
+            <PublicElement>
+              <ListOrder />
+            </PublicElement>
+          }
+        />
+        <Route
+          path="/editRoom/:id"
+          element={
+            <HotelOwnerElement>
+              <UpdateRoom />
+            </HotelOwnerElement>
+          }
+        />
+        <Route
+          path="/createRoom"
+          element={
+
+            <HotelOwnerElement>
+              <CreateRoom />
+            </HotelOwnerElement>
+
+          }
+        />
         <Route path='admin' element={<HomeAdmin />} >
-            <Route
-              index path=""
-              element={
-                  <Dashboard />
-              }
-            />
-                        <Route
-              path="categories"
-              element={
-                  <ManageCategories />
-              }
-            />
-            <Route
-              path="users"
-              element={
-                  <ManagerUser />
-              }
-            />
-          </Route>
-          <Route path='account-setting' >
-            <Route
-              path=""
-              element={
-                  <AccountSetting />
-              }
-            />
-            <Route
-              path="personal-info"
-              element={
-                  <UpdateProfile />
-              }
-            />
-            <Route
-              path="secutiry"
-              element={
-                  <Security />
-              }
-            />
-            <Route
-              path="contract"
-              element={
-                  <ContractPage />
-              }
-            />
+          <Route
+            index path=""
+            element={
+              <AdminElement>
+                <Dashboard />
+              </AdminElement>
+            }
+          />
+          <Route
+            path="categories"
+            element={
+              <AdminElement>
+                <ManageCategories />
+              </AdminElement>
+            }
+          />
+          <Route
+            path="users"
+            element={
+              <AdminElement>
+                <ManagerUser />
+              </AdminElement>
+            }
+          />
+          <Route
+            path="owner"
+            element={
+              <AdminElement>
+                <ManagerOwner />
+              </AdminElement>
+            }
+          />
+        </Route>
+        <Route path='account-setting' >
+          <Route
+            path=""
+            element={
+              <PublicElement>
+                <AccountSetting />
+              </PublicElement>
+            }
+          />
+          <Route
+            path="personal-info"
+            element={
+              <PublicElement>
+                <UpdateProfile />
+              </PublicElement>
+            }
+          />
+          <Route
+            path="secutiry"
+            element={
+              <PublicElement>
+                <Security />
+              </PublicElement>
+            }
+          />
+          <Route
+            path="contract"
+            element={
+              <PublicElement>
+                <ContractPage />
+              </PublicElement>
+            }
+          />
 
-            <Route
-              path="profile"
-              element={
-                  <ProfilePage />
-              }
-            />
-          </Route>
+          <Route
+            path="profile"
+            element={
+              <PublicElement>
+                <ProfilePage />
+              </PublicElement>
+            }
+          />
+        </Route>
       </Routes>
     </>
   );

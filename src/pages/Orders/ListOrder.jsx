@@ -33,7 +33,7 @@ const ListOrder = () => {
   const user = jwtDecode(localStorage.getItem('token'))
 
   const handleSendFeedback = (roomId, index) => {
-    dispatch(sendFeedback({ userId: user.UserId, roomId: roomId, content: feedbacks[index] }))
+    dispatch(sendFeedback({ userId: user.UserId, roomId: roomId, feedback: feedbacks[index] }))
   };
   return (
     <>

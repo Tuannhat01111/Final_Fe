@@ -5,7 +5,7 @@ import axios from "axios"
 
 export const getOrder = createAsyncThunk('order/getProfileByToken', async (_, thunkApi) => {
     try {
-        const reponse = await http.get('/Orders')
+        const reponse = await http.get('api/Orders')
         return reponse
     } catch (error) {
         thunkApi.dispatch(openMessage({ message: "Get Order Failed!", notificationType: 'error' }))
@@ -15,7 +15,7 @@ export const getOrder = createAsyncThunk('order/getProfileByToken', async (_, th
 
 export const getOrderByAdmin = createAsyncThunk('order/getOrderByAdmin', async (_, thunkApi) => {
     try {
-        const reponse = await http.get('/Orders/GetOrdersForAdmin')
+        const reponse = await http.get('api/Orders/GetOrdersForAdmin')
         return reponse
     } catch (error) {
         thunkApi.dispatch(openMessage({ message: "Get Order Failed!", notificationType: 'error' }))
@@ -25,7 +25,7 @@ export const getOrderByAdmin = createAsyncThunk('order/getOrderByAdmin', async (
 
 export const getCountByMonth = createAsyncThunk('order/getCountByMonth', async (_, thunkApi) => {
     try {
-        const reponse = await http.get('/Orders/GetOrderCountByMonth')
+        const reponse = await http.get('api/Orders/GetOrderCountByMonth')
         return reponse
     } catch (error) {
         thunkApi.dispatch(openMessage({ message: "Get Order Failed!", notificationType: 'error' }))
@@ -36,7 +36,7 @@ export const getCountByMonth = createAsyncThunk('order/getCountByMonth', async (
 export const getOrderById = createAsyncThunk('order/getOrderById', async (data, thunkApi) => {
     const { id } = data
     try {
-        const reponse = await http.get(`/Orders${id}`)
+        const reponse = await http.get(`api/Orders${id}`)
         return reponse
     } catch (error) {
         thunkApi.dispatch(openMessage({ message: "Get Order Failed!", notificationType: 'error' }))
