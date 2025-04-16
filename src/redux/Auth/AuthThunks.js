@@ -1,7 +1,7 @@
 
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import http from "../../api/axios-interceptor";
-import { openMessage } from "../Modal/ModalSlice";
+import { closeLogin, openComplain, openMessage } from "../Modal/ModalSlice";
 
 export const login = createAsyncThunk('auth/login', async(data, thunkApi)=>{
     try {
@@ -9,11 +9,30 @@ export const login = createAsyncThunk('auth/login', async(data, thunkApi)=>{
 
         return reponse
     } catch (error) {
+        console.log(error)
+        if (error=== "Account is banned"){
+            thunkApi.dispatch(closeLogin())
+            thunkApi.dispatch(openComplain())
+        }
         thunkApi.dispatch(openMessage({message:error, notificationType: 'error'}))
 
         return thunkApi.rejectWithValue(error)
     }
 })
+
+export const complain = createAsyncThunk('auth/complain', async(data, thunkApi)=>{
+    const {email, content} = data
+    try {
+        const response = await http.post(`Complain/${email}?content=${content}`, data)
+        thunkApi.dispatch(openMessage({message:"Complain Success!", notificationType: 'success'}))
+return response
+    } catch (error) {
+        thunkApi.dispatch(openMessage({message:error, notificationType: 'error'}))
+
+        return thunkApi.rejectWithValue(error)
+    }
+})
+
 
 export const register = createAsyncThunk('auth/register', async(data, thunkApi)=>{
     try {

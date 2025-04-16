@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { activeUser, bandUser, changePassword, getAllStore, getAllUser, getTopDeals, login, register, registerByGoogleAccount, resetPassword, loginByGoogleAccount } from "./AuthThunks";
+import { activeUser, bandUser, changePassword, getAllStore, getAllUser, getTopDeals, login, register, registerByGoogleAccount, resetPassword, loginByGoogleAccount, complain } from "./AuthThunks";
 import { jwtDecode } from "jwt-decode";
 import decodeTokenAndCheckExpiration from "../../api/decodeTokenAndCheckExpiration";
 
@@ -79,7 +79,18 @@ const authSlice = createSlice({
             state.loading= false
             state.error = action.payload
         })
-
+        builder.addCase(complain.pending,(state,action)=>{
+            state.loading = true
+            state.error = ''
+        })
+        builder.addCase(complain.fulfilled, (state, action) =>{
+            state.loading=false
+            state.error = ''
+        })
+        builder.addCase(complain.rejected, (state,action) =>{
+            state.loading= false
+            state.error = action.payload
+        })
         builder.addCase(registerByGoogleAccount.pending,(state,action)=>{
             state.loading = true
             state.error = ''

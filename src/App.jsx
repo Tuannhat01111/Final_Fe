@@ -24,6 +24,7 @@ import ManagerOwner from './pages/HomeAdmin/ManageOwner/ManageOwner';
 import PublicElement from './components/commonAuth/PublicElement';
 import HotelOwnerElement from './components/commonAuth/HotelOwnerElement';
 import AdminElement from './components/commonAuth/AdminElement';
+import ComplainModal from "./components/Modal/ComplainModal";
 
 
 
@@ -49,6 +50,7 @@ function App() {
       <ForgetPassword />
       <ToastNotification />
       <RegisterModal />
+      <ComplainModal />
       <Routes>
         <Route path="/" element={
           <PublicElement>

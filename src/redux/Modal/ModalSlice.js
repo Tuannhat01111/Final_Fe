@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const initialState ={
+    complain: false,
     login: false,
     register: false,
     forgetPassword:false,
@@ -14,6 +15,12 @@ const modalSlice = createSlice({
     name: "modal",
     initialState,
     reducers:{
+        openComplain:(state, action)=>{
+            state.complain = true; 
+        } ,
+        closeComplain: (state, action)=>{
+            state.complain = false; 
+        },
         openLogin:(state, action)=>{
             state.login = true; 
         } ,
@@ -56,5 +63,5 @@ const modalSlice = createSlice({
    
 });
 
-export const {openDetailsChart,closeDetailsChart,openLogin, closeLogin,openRegister,closeRegister, openMessage,resetMessage, closeFotgetPassword, openForgetPassword, openDetails, closeDetails} = modalSlice.actions
+export const {openComplain,closeComplain,openDetailsChart,closeDetailsChart,openLogin, closeLogin,openRegister,closeRegister, openMessage,resetMessage, closeFotgetPassword, openForgetPassword, openDetails, closeDetails} = modalSlice.actions
 export default modalSlice.reducer
