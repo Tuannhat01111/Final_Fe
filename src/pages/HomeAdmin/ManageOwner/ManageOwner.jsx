@@ -1,13 +1,20 @@
 import { Button, Space, Table, Tag } from 'antd';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllStore, getAllUser } from '../../../redux/auth/authThunks';
+import { getAllStore, bandHotelOwner, activeHotelOwner } from '../../../redux/auth/authThunks';
 import '../ManageUser/User.scss';
 const { Column, ColumnGroup } = Table;
 
 const ManagerOwner = () => {
     const dispatch = useDispatch()
     const data = useSelector((state) => state.auth.store)
+
+    const activeHotelOwnerButton = (id, isBanned) =>{
+            if(isBanned === true){
+                return dispatch(activeHotelOwner(id))
+            }
+            dispatch(bandHotelOwner(id))
+        }
 
     useEffect(()=>{
         dispatch(getAllStore())
@@ -34,12 +41,12 @@ const ManagerOwner = () => {
                             </span>
                           )}
                     />
-                    <Column
+                     <Column
                         title="Action"
                         key="action"
                         render={(_, record) => (
                             <Space size="middle">
-                                <Button>Ban Store </Button>
+                                <Button onClick={()=>{activeHotelOwnerButton(record?.id, record?.isBanned)}}>{record.isBanned? 'Active Hotel Owner' : 'Ban Hotel Owner'} </Button>
                             </Space>
                         )}
                     />

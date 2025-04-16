@@ -145,3 +145,27 @@ export const bandUser = createAsyncThunk('auth/bandUser', async(data, thunkApi)=
         return thunkApi.rejectWithValue(error)
     }
 })
+
+
+export const activeHotelOwner = createAsyncThunk('auth/activeHotelOwner', async(data, thunkApi)=>{
+    try {
+        const reponse = await http.post(`/BanUser/${data}?isBanned=false`)
+        thunkApi.dispatch(openMessage({message:"Active Hotel Owner Success!", notificationType: 'success'}))
+        return reponse
+    } catch (error) {
+        thunkApi.dispatch(openMessage({message:"Active Hotel Owner Failed!", notificationType: 'error'}))
+        return thunkApi.rejectWithValue(error)
+    }
+})
+
+
+export const bandHotelOwner = createAsyncThunk('auth/bandHotelOwner', async(data, thunkApi)=>{
+    try {
+        const reponse = await http.post(`/BanUser/${data}?isBanned=true`)
+        thunkApi.dispatch(openMessage({message:"Band Hotel Owner Success!", notificationType: 'success'}))
+        return reponse
+    } catch (error) {
+        thunkApi.dispatch(openMessage({message:"Band Hotel Owner Failed!", notificationType: 'error'}))
+        return thunkApi.rejectWithValue(error)
+    }
+})
