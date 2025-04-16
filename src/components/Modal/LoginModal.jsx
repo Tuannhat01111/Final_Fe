@@ -48,13 +48,15 @@ const LoginModal = () => {
     <div className="flex flex-col gap-4 w-full">
       <TextField
         className="w-full text-center mx-0 my-2.5 px-0 py-[7px] border rounded-[10px] border-solid border-black"
-        name="email"
         label="Email"
-        placeholder="email"
         value={formik.values.email}
+        autoComplete="off"
         onChange={formik.handleChange}
         error={formik.touched.email && Boolean(formik.errors.email)}
         helperText={formik.touched.email && formik.errors.email}
+        slots={{
+          autoComplete: "off"
+        }}
         style={{
           marginBottom: "10px",
           display: "inline-grid",
@@ -62,14 +64,16 @@ const LoginModal = () => {
       />
       <TextField
         className="w-full text-center mx-0 my-2.5 px-0 py-[7px] border rounded-[10px] border-solid border-[black]"
-        name="password"
-        placeholder="password"
         label="Password"
         type="password"
         value={formik.values.password}
+        autoComplete="off"
         onChange={formik.handleChange}
         error={formik.touched.password && Boolean(formik.errors.password)}
         helperText={formik.touched.password && formik.errors.password}
+        slots={{
+          autoComplete: "off"
+        }}
         style={{
           marginBottom: "10px",
           display: "inline-grid",

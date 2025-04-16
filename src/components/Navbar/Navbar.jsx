@@ -30,19 +30,19 @@ const Navbar = () => {
 
   const [name, setName] = React.useState()
   useEffect(() => {
-      dispatch(getAllRooms({ name: name }))
+    dispatch(getAllRooms({ name: name }))
   }, [name])
 
   const handleChange = (event) => {
-      setName(event.target.value || '');
+    setName(event.target.value || '');
   };
-  
+
   const handleRefresh = (event) => {
     window.location.href = "/";
 
-};
+  };
   useEffect(() => {
-    if (isLoggedIn){
+    if (isLoggedIn) {
       dispatch(getProfileByToken())
     }
   }, [])
@@ -80,7 +80,7 @@ const Navbar = () => {
           color="inherit"
         >
           <Badge badgeContent={17} colo
-          r="error">
+            r="error">
             <NotificationsIcon />
           </Badge>
         </IconButton>
@@ -133,16 +133,19 @@ const Navbar = () => {
                     <TextField
                       fullWidth
                       variant="standard"
-                      placeholder="Please enter name hotel"
+                      placeholder="Please enter hotel name"
+                      id="hotelNameInput"
+                      name="hotelNameInput"
+                      type="text"
+                      autoComplete="new-password" 
                       InputProps={{
+                        autoComplete: 'new-password',
                         disableUnderline: true,
                       }}
-                      id="fullWidth"
                       value={name}
-                        onChange={(e) => {
-                          handleChange(e);
-                        }}
+                      onChange={handleChange}
                     />
+
                   </div>
                 </div>
               </div>
