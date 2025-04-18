@@ -93,6 +93,18 @@ const Details = () => {
                                 <h2>Address: {detail.street}</h2>
                             </div>
                             <div className="border border-gray-200 w-full"></div>
+                            <div className="py-6">
+                                <h1 className="py-2 font-semibold text-2xl">Type of accommodation service</h1>
+                                <div className="grid grid-cols-2">
+                                    <div className="flex flex-row items-center">
+                                        <h1 >Phân loại: {detail?.category?.name}</h1>
+                                    </div>
+                                    <div className="flex flex-row items-center">
+                                        <h1 className="px-4">Mô tả phân loại:  {detail?.category?.description}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="border border-gray-200 w-full"></div>
 
                             <div className="flex flex-row py-5">
                                 <div className="w-16 h-16 rounded-full object-cover">
@@ -114,18 +126,7 @@ const Details = () => {
                                 <div dangerouslySetInnerHTML={{ __html: detail?.description }}></div>
                             </div>
 
-                            <div className="border border-gray-200 w-full"></div>
-                            <div className="py-6">
-                                <h1 className="py-2 font-semibold text-2xl">Type of accommodation service</h1>
-                                <div className="grid grid-cols-2">
-                                    <div className="flex flex-row items-center">
-                                        <h1 >Phân loại: {detail?.category?.name}</h1>
-                                    </div>
-                                    <div className="flex flex-row items-center">
-                                        <h1 className="px-4">Mô tả phân loại:  {detail?.category?.description}</h1>
-                                    </div>
-                                </div>
-                            </div>
+
 
                             <div className="border border-gray-200 w-full"></div>
                             <div className="flex flex-row py-5">
@@ -146,33 +147,20 @@ const Details = () => {
                                         <div dangerouslySetInnerHTML={{ __html: detail?.user?.profile?.description }}></div>
                                     </div>
                                 </div>
-                                
+                                <div className="flex w-full lg:w-2/4 flex-col lg:ml-10">
+                                <div className="flex items-center justify-center border-r border-gray-400">
+                                    <img className="object-cover h-40" loading="lazy" src="https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/78b7687c-5acf-4ef8-a5ea-eda732ae3b2f.png" />
 
-                                {isLoggedIn && (
-                                    <div className="flex w-full lg:w-2/4 flex-col lg:ml-40">
-                                        <h1 className="font-bold text-lg">Feedback:</h1>
-
-                                        <TextField
-                                            id="outlined-multiline-static"
-                                            value={feedback}
-                                            onChange={handleChange}
-                                            multiline
-                                            rows={12}
-                                            placeholder="If you have any problems, please enter here and the system will send an email to the store owner"
-                                        />
-
-                                        <div className="py-4">
-                                            <button
-                                                className="py-3 px-6 border border-black rounded-xl font-semibold"
-                                                onClick={handleSendFeedback}
-                                            >
-                                                Send feedback to owner room
-                                            </button>
-                                        </div>
-                                    </div>
-                                )}
-
+                                    <h1 className="text-center text-6xl font-bold"> 5.0</h1>
+                                    <img className="object-cover h-40" loading="lazy" src="https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/b4005b30-79ff-4287-860c-67829ecd7412.png" />
+                                </div>
+                                <div className="flex flex-col items-center justify-center gap-4">
+                                    <h1 className="text-3xl font-bold text-center">Guest Is Like</h1>
+                                    <p className="text-xl text-gray-400 text-center">One of the most popular homes on Airbnb based on ratings, reviews, and trust</p>
+                                </div>
                             </div>
+                            </div>
+                          
                             <div className="border border-gray-200 w-full"></div>
                             <div className="hidden sm:flex justify-center flex-col py-4 w-full ">
                                 <div>
@@ -186,76 +174,70 @@ const Details = () => {
                             </div>
 
                         </div>
-                        <div class="lg:hidden  fixed z-50 w-full h-20 -translate-x-1/2 bg-white bottom-0 left-1/2 shadow-[1px_1px_5px_-1px_rgba(0,0,0,0.3)] ">
 
-                            <div class="grid h-full grid-cols-2 mx-auto">
-                                <div className="flex flex-col justify-start px-6 py-4">
-                                    <h1>1231231</h1>
-                                    <p className=" font-medium underline underline-offset-4 cursor-pointer">ngay 09 - ngay 12 thang 4</p>
-
-
-                                </div>
-                                <div className="flex items-center justify-center">
-                                    <button className="flex py-3 px-8 border border-none justify-center items-center w-full rounded-2xl bg-primary text-white" onClick={() => { handleSubmit() }}>
-                                        Booking
-                                    </button><i className="fas fa-eye  ms-2"></i>
-                                </div>
-
-
-                            </div>
-
-                        </div>
                         <div className="hidden lg:flex  lg:w-1/3  lg:justify-end  ">
                             <div
                                 className=
-                                "hidden w-[80%] lg:flex flex-col border border-gray-200 py-4 px-4 rounded-lg shadow-2xl sm:max-h-[90vh]  lg:max-h-[35vh] sm:sticky sm:top-20 lg:top-44 object-cover"
+                                "hidden w-[80%] lg:flex flex-col border border-gray-200 py-4 px-4 rounded-lg shadow-2xl sm:max-h-[100vh]  lg:max-h-[60vh] sm:sticky sm:top-20 lg:top-44 object-cover"
                             >
+                                {isLoggedIn && (
+                                    <div >
+                                        <TextField
+                                            id="outlined-multiline-static"
+                                            value={feedback}
+                                            onChange={handleChange}
+                                            multiline
+                                            rows={3}
+                                            fullWidth
+                                            placeholder="If you have any problems, please enter here and the system will send an email to the store owner"
+                                        />
+
+                                        <div className="py-4">
+                                            <button
+                                                className="bg-blue-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full justify-center items-center w-full"
+                                                onClick={handleSendFeedback}
+                                            >
+                                                Send feedback to owner room
+                                            </button>
+                                            <div className="mt-2 border border-gray-200 w-full"></div>
+                                        </div>
+                                    </div>
+                                )}
+
                                 <div className="flex flex-row items-center">
                                     <h1 className="font-bold text-2xl">${detail?.price}</h1>
                                     <h1>/night</h1>
                                 </div>
-                                <span className="py-2">
-                                    {/* <Link to={`/order/${id}`}> */}
-                                    <button className="bg-blue-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full justify-center items-center w-full" onClick={() => { handleSubmit() }}>
-                                        Booking
-                                    </button><i className="fas fa-eye  ms-2"></i>
-                                    {/* </Link> */}
 
-                                </span>
-
+                                <div className="flex py-2 justify-between">
+                                    <h1 className="underline">Unit price</h1>
+                                    <h1>${detail?.price}</h1>
+                                </div>
                                 <div className="flex py-2 justify-between">
                                     <h1 className="underline">${detail?.price} x {diffDay} day</h1>
                                     <h1>${totalPrice}</h1>
                                 </div>
-
-                                <div className="flex py-2 justify-between">
-                                    <h1 className="underline">%Tax</h1>
-                                    <h1 className="text-green-600">+10%</h1>
-                                </div>
                                 <div className="mt-2 border border-gray-200 w-full"></div>
 
                                 <div className="flex py-2 justify-between">
-                                    <h1 className="font-bold text-xl">Total before taxes</h1>
+                                    <h1 className="font-bold text-xl">Total:</h1>
                                     <h1 className="font-blod text-xl">${totalPrice}</h1>
                                 </div>
+
+                                <p><i>Please complete the payment as instructed to confirm your booking.</i> We support bank transfers, e-wallets, and credit cards. <i>All transactions are secure and encrypted.</i> If you encounter any issues, feel free to send feedback or contact the host for assistance.</p>
+                                <span className="py-2">
+                                    <button className="bg-blue-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full justify-center items-center w-full" onClick={() => { handleSubmit() }}>
+                                        Booking
+                                    </button><i className="fas fa-eye  ms-2"></i>
+                                </span>
                             </div>
 
                         </div>
                     </div>
                     <div className="border border-gray-200 w-full"></div>
-                    <div className="py-10">
-                        <div className="flex items-center justify-center border-r border-gray-400">
-                            <img className="object-cover h-40" loading="lazy" src="https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/78b7687c-5acf-4ef8-a5ea-eda732ae3b2f.png" />
-
-                            <h1 className="text-center text-6xl font-bold"> 5.0</h1>
-                            <img className="object-cover h-40" loading="lazy" src="https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/b4005b30-79ff-4287-860c-67829ecd7412.png" />
-                        </div>
-                        <div className="flex flex-col items-center justify-center gap-4">
-                            <h1 className="text-3xl font-bold text-center">Guest Is Like</h1>
-                            <p className="text-xl text-gray-400 text-center">One of the most popular homes on Airbnb based on ratings, reviews, and trust</p>
-                        </div>
+                    <div>
+                        <h4 className=" text-xl font-bold ">Feeback from user:</h4>
                     </div>
-                    <div className="border border-gray-200 w-full"></div>
                     <div className="grid grid-cols-2 gap-12">
                         {detail?.feedbacks?.map((item) => (
 
@@ -275,36 +257,11 @@ const Details = () => {
 
                             </div>
                         ))}
-
                     </div>
-
                     <div className="border border-gray-200 w-full"></div>
 
-                    <div className="py-8 px-5">
-                        <h1 className="text-xl font-semibold py-4">Things to now</h1>
-                        <div className="grid grid-cols-1 sm:grid-cols-3">
-                            <div className="flex flex-col">
-                                <h1 className="font-semibold text-lg">House rule</h1>
-                                <h1>Check in</h1>
-                                <h1>Check out</h1>
-                                <h1>4 guest maximum</h1>
-                            </div>
-                            <div className="flex flex-col">
-                                <h1 className="font-semibold text-lg">Safety & property</h1>
-                                <h1>Nearby lake, river, other body of water</h1>
-                                <h1>Carbon monoxide alarm</h1>
-                                <h1>Smoke alarm</h1>
-                            </div>
-                            <div className="flex flex-col">
-                                <h1 className="font-semibold text-lg">Cancellation policy</h1>
-                                <h1>This reservation is non-refundable.</h1>
-                                <h1>Review the Hosts full cancellation policy which applies even if you cancel for illness or disruptions caused by COVID-19.</h1>
 
-                            </div>
-                        </div>
-                    </div>
                 </div>
-
             </div>
         </>
     )

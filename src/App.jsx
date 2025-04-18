@@ -9,7 +9,6 @@ import HomeAdmin from "./pages/HomeAdmin/HomeAdmin";
 import AccountSetting from "./pages/Setting/AccountSetting";
 import Security from "./pages/Setting/ChangePassword";
 import ContractPage from "./pages/Setting/ContractPage";
-import ProfilePage from "./pages/Setting/Profile";
 import UpdateProfile from "./pages/Setting/UpdateProfile"
 import ManagerUser from "./pages/HomeAdmin/ManageUser/ManageUser"
 import Details from "./pages/Room/Details"
@@ -174,15 +173,6 @@ function App() {
             element={
               <PublicElement>
                 <ContractPage />
-              </PublicElement>
-            }
-          />
-
-          <Route
-            path="profile"
-            element={
-              <PublicElement>
-                <ProfilePage />
               </PublicElement>
             }
           />

@@ -95,7 +95,9 @@ const UpdateProfile = () => {
                     <BreadcrumbSetting />
                 </div>
                 <div className="flex flex-col lg:flex-row px-4 sm:px-12 lg:px-24 gap-20 border border-gray-200 shadow-2xl rounded-2xl py-8 ">
+
                     <div className="flex flex-col gap-2 lg:gap-4 lg:w-1/3">
+
                         <div className="flex justify-center items-center">
                             <Upload
                                 name="avatar"
@@ -150,34 +152,32 @@ const UpdateProfile = () => {
 
                     </div>
                     <div className="flex flex-col lg:w-2/3">
+                        <p className="italic text-gray-600 mb-6">
+                            *Hãy dành ít phút để cập nhật đầy đủ thông tin hồ sơ cá nhân của bạn. Việc này không chỉ giúp chúng tôi hỗ trợ bạn tốt hơn mà còn nâng cao độ tin cậy của tài khoản khi đặt phòng, gửi phản hồi, hoặc tương tác với chủ phòng. Thông tin rõ ràng và chính xác cũng giúp quá trình xác nhận và thanh toán diễn ra suôn sẻ hơn. Cảm ơn bạn đã hợp tác!*
+                        </p>
+
+
                         <div class="sm:col-span-2 h-full lg:pt-3">
-                            <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                            <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-dark">Description</label>
 
                             <div className='editor'>
                                 <ReactQuill theme="snow"
                                     value={description}
                                     onChange={handleEditorChange}
                                     className="editor-input h-full editor-quill"
-                                    style={{ borderRadius: 5, height: "300px", marginBottom: "50px" }}
+                                    style={{ borderRadius: 5, height: "200px", marginBottom: "50px" }}
                                 />
                             </div>
 
                         </div>
-                       
-                        <div className="flex justify-center mt-12">
-                            <Button
-                                type="submit"
-                                variant="outlined"
+                        <div className="w-full flex justify-center">
+                            <button
+                                className="max-w-[25%] bg-blue-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full w-full"
                                 onClick={formik.handleSubmit}
-                                style={{
-                                    border: 'none',
-                                    backgroundColor: '#079a9f',
-                                    color: 'white',
-                                    height: '70%'
-                                }}
+                                type="submit"
                             >
                                 Save Change
-                            </Button>
+                            </button>
                         </div>
                     </div>
 

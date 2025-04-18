@@ -15,11 +15,11 @@ const CheckoutOrder = () => {
     const [totalPrice, setTotalPrice] = useState(parseInt(location?.state?.totalPrice));
 
     const handleCreateOrder = async () => {
-        const orderId = await dispatch(createOrderPaypal(totalPrice + (totalPrice  / 10)));
+        const orderId = await dispatch(createOrderPaypal(totalPrice + (totalPrice / 10)));
         return orderId.payload;
     };
     const handleOnApprove = (data) => {
-        dispatch(onApprove({ dataPaypal: data, price: totalPrice + (totalPrice  / 10), note: "", startDate: moment(location?.state?.date?.startDate).toISOString(), endDate: moment(location?.state?.date?.endDate).toISOString(), roomId: id })).unwrap().then((res)=>{
+        dispatch(onApprove({ dataPaypal: data, price: totalPrice + (totalPrice / 10), note: "", startDate: moment(location?.state?.date?.startDate).toISOString(), endDate: moment(location?.state?.date?.endDate).toISOString(), roomId: id })).unwrap().then((res) => {
             navigate('/orders')
         });
     };
@@ -64,11 +64,29 @@ const CheckoutOrder = () => {
                                 <h1 className="font-semibold text-xl mb-4">{detail?.name}</h1>
                                 <h2>{detail?.street}</h2>
                             </div>
+                            <div className="border border-gray-200 w-full"></div>
+                            <div className="py-6">
+                                <h1 className="py-2 font-semibold text-2xl">Type of accommodation service</h1>
+                                <div className="grid grid-cols-2">
+                                    <div className="flex flex-row items-center">
+                                        <h1 >Phân loại: {detail?.category?.name}</h1>
+                                    </div>
+                                    <div className="flex flex-row items-center">
+                                        <h1 className="px-4">Mô tả phân loại:  {detail?.category?.description}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="border border-gray-200 w-full"></div>
 
                             <div className="flex flex-row py-5">
                                 <div className="w-16 h-16 rounded-full object-cover">
-                                    <img src="https://static.vecteezy.com/system/resources/previews/002/002/257/non_2x/beautiful-woman-avatar-character-icon-free-vector.jpg" alt="" />
-                                </div>
+                                    <img className=" object-cover w-[70px] h-[70px] rounded-full"
+                                        src={
+                                            detail?.user?.profile?.avatarUrl ||
+                                            "https://static.vecteezy.com/system/resources/previews/002/002/257/non_2x/beautiful-woman-avatar-character-icon-free-vector.jpg"
+                                        }
+                                        alt="avatar"
+                                    />                                </div>
                                 <div className="flex px-5 flex-col justify-center">
                                     <h1 className="text-2xl font-bold">Hoster By : {detail?.user?.profile?.fullName}</h1>
                                     <h2> Joined in November: {moment(detail?.user?.profile?.createdAt).format('MM/DD/YYYY')}</h2>
@@ -86,10 +104,7 @@ const CheckoutOrder = () => {
                                 className=
                                 "hidden w-[80%] overflow-hidden overflow-y-auto lg:flex flex-col border border-gray-200  py-4 px-4 rounded-lg shadow-2xl sm:max-h-[35vh]  lg:max-h-[90vh] object-cover"
                             >
-                                <div className="flex flex-row gap-1">
-                                    <p className="font-semibold text-xl mb-4 ">{location?.state?.price}$/ </p>
-                                    <p className=" underline underline-offset-1 "> night</p>
-                                </div>
+                            
                                 <div className="flex flex-row justify-around items-center">
                                     <h2 className="font-semibold">Start Date </h2>
                                     <h2 className="font-semibold">End Date </h2>
@@ -102,62 +117,37 @@ const CheckoutOrder = () => {
                                 </div>
                                 <div className="mt-2 border border-gray-200 w-full"></div>
                                 <div className="flex py-2 justify-between">
-                                    <h1 className="underline underline-offset-2 text-lg">{location?.state?.price} $ x {location?.state?.diffDay} night</h1>
-                                    <h2 className=" text-lg">${location?.state?.totalPrice} </h2>
-                                
+                                    <h1 className="underline">Unit price</h1>
+                                    <h1>${detail?.price}</h1>
                                 </div>
                                 <div className="flex py-2 justify-between">
-                                    <h1 className="underline underline-offset-2 text-lg">Tax 10%</h1>
-                                    <h2 className=" text-lg">${location?.state?.totalPrice  / 10} </h2>
-                                
+                                    <h1 className="underline underline-offset-2 text-lg">{location?.state?.price} $ x {location?.state?.diffDay} night</h1>
+                                    <h2 className=" text-lg">${location?.state?.totalPrice} </h2>
+
                                 </div>
+                        
                                 <div className="border border-gray-200 w-full"></div>
+                                <div className="flex py-2 justify-between">
+                                    <h1 className="font-bold text-xl">Total: </h1>
+                                    <h2 className="font-bold text-xl">$ {location?.state?.totalPrice + (location?.state?.totalPrice / 10)}</h2>
+                                </div>
                                 <div className="flex py-2 justify-between mb-10">
-                                    <h1 className="font-bold text-xl">Total after tax </h1>
-                                    <h2 className="font-bold text-xl">$ {location?.state?.totalPrice + (location?.state?.totalPrice  / 10)}</h2>
+                                <p><i>Please complete the payment as instructed to confirm your booking.</i> We support bank transfers, e-wallets, and credit cards. <i>All transactions are secure and encrypted.</i> If you encounter any issues, feel free to send feedback or contact the host for assistance.</p>
                                 </div>
                                 <div>
 
-                                <PayPalScriptProvider
-                                    options={{
-                                        clientId: "AVUFZ--HoO4trdrJGthrRsviaWOTpJBKuFzvGGP2I8lxw9JpgpFTdGou-2Ou7sO3177PY4u-zx33LdiC",
-                                    }}
-                                >
-                                    <PayPalButtons
-                                        createOrder={handleCreateOrder}
-                                        onApprove={handleOnApprove}
-                                    />
-                                </PayPalScriptProvider>
+                                    <PayPalScriptProvider
+                                        options={{
+                                            clientId: "AVUFZ--HoO4trdrJGthrRsviaWOTpJBKuFzvGGP2I8lxw9JpgpFTdGou-2Ou7sO3177PY4u-zx33LdiC",
+                                        }}
+                                    >
+                                        <PayPalButtons
+                                            createOrder={handleCreateOrder}
+                                            onApprove={handleOnApprove}
+                                        />
+                                    </PayPalScriptProvider>
 
                                 </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                    <div className="border border-gray-200 w-full"></div>
-
-                    <div className="py-8 px-5">
-                        <h1 className="text-xl font-semibold py-4">Things to now</h1>
-                        <div className="grid grid-cols-1 sm:grid-cols-3">
-                            <div className="flex flex-col">
-                                <h1 className="font-semibold text-lg">House rule</h1>
-                                <h1>Check in</h1>
-                                <h1>Check out</h1>
-                                <h1>4 guest maximum</h1>
-                            </div>
-                            <div className="flex flex-col">
-                                <h1 className="font-semibold text-lg">Safety & property</h1>
-                                <h1>Nearby lake, river, other body of water</h1>
-                                <h1>Carbon monoxide alarm</h1>
-                                <h1>Smoke alarm</h1>
-                            </div>
-                            <div className="flex flex-col">
-                                <h1 className="font-semibold text-lg">Cancellation policy</h1>
-                                <h1>This reservation is non-refundable.</h1>
-                                <h1>Review the Host’s full cancellation policy which applies even if you cancel for illness or disruptions caused by COVID-19.</h1>
-
                             </div>
                         </div>
                     </div>

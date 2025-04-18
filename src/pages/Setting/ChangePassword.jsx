@@ -4,20 +4,33 @@ import { changePassword } from "../../redux/Auth/AuthThunks";
 import { Switch } from 'antd';
 import BreadcrumbSetting from "./Breadcrumb";
 import { disableOwnerStore } from "../../redux/UserRole/UserRoleThunks";
+import { TextField, Button } from '@mui/material';
+import * as yup from "yup";
+import { useFormik } from "formik";
+
+const validationSchema = yup.object({
+    password: yup.string().required("Current Password is required"),
+    newPassword: yup.string().required("New Password is required"),
+    confirmPassword: yup.string().required("Confirm Password is required"),
+});
+
+
 const Security = () => {
     const dispatch = useDispatch()
     const [isChangePassword, setIsChangePassword] = useState(false);
-    const [data, setData] = useState({
-        password: '',
-        newPassword: '',
-        confirmPassword: ''
+
+    const formik = useFormik({
+        initialValues: {
+            password: "",
+            newPassword: "",
+            confirmPassword: "",
+        },
+        validationSchema: validationSchema,
+        onSubmit: async (values) => {
+            dispatch(changePassword(values))
+        },
     });
 
-    const submitChangePassword = () => {
-        if (data.newPassword === data.confirmPassword) {
-            dispatch(changePassword(data))
-        }
-    }
     const handleSubmit = () => {
         dispatch(disableOwnerStore())
     };
@@ -31,25 +44,83 @@ const Security = () => {
 
                     <div className="my-2">
                         <div className="flex flex-row justify-between">
-                            <p className=" text-2xl font-semibold">Change Password</p>
+                            <p className=" text-2xl mb-5 font-semibold">Change Password</p>
                             <button className=" font-medium text-[#008489]" onClick={() => { setIsChangePassword(!isChangePassword) }}>Update</button>
                         </div>
                         {isChangePassword ? (
                             <>
                                 <div className="flex flex-col">
                                     <div className="flex flex-col w-full gap-2 my-2">
-                                        <p>Current Password</p>
-                                        <input className="border border-gray-300 h-10 " type="password" value={data.password} onChange={(e) => { setData({ ...data, password: e.target.value }) }} ></input>
+                                        <TextField
+                                            className="w-full text-center mx-0 my-2.5 px-0 py-[7px] border rounded-[10px] border-solid border-[black]"
+                                            name="password"
+                                            label="Current Password"
+                                            placeholder="Current Password"
+                                            type="password"
+                                            value={formik.values.password}
+                                            onChange={formik.handleChange}
+                                            error={formik.touched.password && Boolean(formik.errors.password)}
+                                            helperText={formik.touched.password && formik.errors.password}
+                                            slots={{
+                                                autoComplete: "off"
+                                            }}
+                                            style={{
+                                                marginBottom: "10px",
+                                                display: "inline-grid",
+                                            }}
+                                        />
                                     </div>
                                     <div className="flex flex-col w-full gap-2 my-2">
-                                        <p>New Password</p>
-                                        <input className="border border-gray-300 h-10" type="password" value={data.newPassword} onChange={(e) => { setData({ ...data, newPassword: e.target.value }) }} ></input>
+                                        <TextField
+                                            className="w-full text-center mx-0 my-2.5 px-0 py-[7px] border rounded-[10px] border-solid border-[black]"
+                                            name="newPassword"
+                                            label="New Password"
+                                            placeholder="New Password"
+                                            type="password"
+                                            value={formik.values.newPassword}
+                                            onChange={formik.handleChange}
+                                            error={formik.touched.newPassword && Boolean(formik.errors.newPassword)}
+                                            helperText={formik.touched.newPassword && formik.errors.newPassword}
+                                            slots={{
+                                                autoComplete: "off"
+                                            }}
+                                            style={{
+                                                marginBottom: "10px",
+                                                display: "inline-grid",
+                                            }}
+                                        />
                                     </div>
                                     <div className="flex flex-col w-full gap-2 my-2">
-                                        <p>Confirm New Password</p>
-                                        <input className="border border-gray-300 h-10 " type="password" value={data.confirmPassword} onChange={(e) => { setData({ ...data, confirmPassword: e.target.value }) }} ></input>
+                                        <TextField
+                                            className="w-full text-center mx-0 my-2.5 px-0 py-[7px] border rounded-[10px] border-solid border-[black]"
+                                            name="confirmPassword"
+                                            label="Confirm New Password"
+                                            placeholder="Confirm New Password"
+                                            type="password"
+                                            value={formik.values.confirmPassword}
+                                            onChange={formik.handleChange}
+                                            error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
+                                            helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
+                                            slots={{
+                                                autoComplete: "off"
+                                            }}
+                                            style={{
+                                                marginBottom: "10px",
+                                                display: "inline-grid",
+                                            }}
+                                        />
                                     </div>
-                                    <button className="py-2 px-4 bg-[#008489] text-white max-w-[40%] mt-2 rounded-md" onClick={() => (submitChangePassword())}> Update Password</button>
+
+                                    <div className="w-full flex justify-center">
+                                        <button
+                                            className="max-w-[15%] bg-blue-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full w-full"
+                                            onClick={formik.handleSubmit}
+                                            type="submit"
+                                        >
+                                            Save Change
+                                        </button>
+                                    </div>
+
                                 </div>
                             </>
                         )
@@ -119,7 +190,7 @@ const Security = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
         </>
     )
 }

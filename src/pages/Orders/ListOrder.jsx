@@ -33,7 +33,7 @@ const ListOrder = () => {
   const user = jwtDecode(localStorage.getItem('token'))
 
   const handleSendFeedback = (roomId, index) => {
-    dispatch(sendFeedback({ userId: user.UserId, roomId: roomId, feedback: feedbacks[index] }))
+    dispatch(sendFeedback({ userId: user.UserId, roomId: roomId, content: feedbacks[index] }))
   };
   return (
     <>
@@ -57,48 +57,45 @@ const ListOrder = () => {
                         <div className="flex flex-col justify-center  sm:items-start gap-3">
                           <h1 className="text-xl font-medium md:w-full md:text-center">{item?.room?.name}</h1>
                           <div className='flex justify-around w-full'>
-                            <p>StartDate</p>  
-                            <p>EndDate</p>
+                            <p>Start Date</p>
+                            <p>End Date</p>
+                            <p>Paid</p>
                           </div>
                           <div className='flex justify-around w-full'>
                             <p>{format(item?.startDate, "MM/dd/yyyy")}</p>
                             <p>{format(item?.endDate, "MM/dd/yyyy")}</p>
+                            <p>${item?.price}</p>
                           </div>
-                          <div className="border border-gray-200 w-full"></div>
-                          <div className='flex flex-row w-full items-start justify-center gap-2 md:items-center'>
-                            <PaidIcon size='55px' />
-                            <p className='font-normal'>${item?.price}  </p>
+                          <div className="mt-4">
+                            <p className="text-sm text-gray-600 italic">
+                              <strong>Note:</strong> Please confirm the exact start and end dates of your stay. To ensure your accommodation at the hotel, please complete your booking at least 24 hours in advance. Ensure that all necessary requirements, such as valid identification and payment, are completed on time to avoid cancellation of your reservation.
+                            </p>
                           </div>
-                          <p>{item?.note}</p>
-                          {/* <p>loai 1 phong ngu </p> */}
                         </div>
                         <div className='flex flex-col md:flex-row justify-center items-center w-full relative'>
-                          <div className='flex flex-row w-full sm:gap-6 sm:px-6'>
+                          <div className='w-full sm:gap-6 sm:px-6'>
                             <TextField
                               id={`feedback-${index}`}
-                              className='shadow-2xl'
                               value={selectedFeedbackIndex === index ? feedbacks[index] : ''}
                               onChange={(event) => handleChange(index, event)}
                               onFocus={() => handleSelectFeedback(index)}
-                              variant="standard"
-                              InputProps={{
-                                disableUnderline: true,
-                                style: {
-                                  width: '100%',
-                                  borderRadius: 15,
-                                  textAlign: 'center',
-                                  padding: '10px 10px 50px 10px'
-                                },
-                              }}
                               multiline
-                              rows={7}
-                              placeholder="If you have any problems"
-                              style={{ width: '100%', borderRadius: 15, placeContent: 'center' }}
+                              rows={6}
+                              fullWidth
+                              placeholder="If you have any problems, please enter here and the system will send an email to the store owner"
                             />
 
+                            <div className="py-4 flex justify-center">
+                              <button
+                                className="bg-blue-500 hover:bg-pink-600 text-white font-bold py-2 px-6 rounded-full"
+                                onClick={() => handleSendFeedback(item?.roomId, index)}
+                              >
+                                Send feedback to owner room
+                              </button>
+                            </div>
+
                           </div>
-                          <button className='border border-black px-4 py-1 rounded-lg absolute bottom-2' onClick={() => handleSendFeedback(item?.roomId,index)}>
-                            Submit</button>
+
                         </div>
                       </div>
                     </div>
