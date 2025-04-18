@@ -8,12 +8,14 @@ import DatePicker from "../../components/calendar/Calendar";
 import { openLogin } from "../../redux/modal/modalSlice";
 import useTotalPrice, { calculateNumberOfDays } from './useTotalPrice';
 import moment from "moment";
+import { jwtDecode } from "jwt-decode";
 
 const Details = () => {
     const dispatch = useDispatch()
     const { id } = useParams()
     const { detail } = useSelector((state) => state.room)
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
+    const user = jwtDecode(localStorage.getItem('token'))
 
     const navigate = useNavigate()
     useEffect(() => {
@@ -26,7 +28,7 @@ const Details = () => {
     };
 
     const handleSendFeedback = (event) => {
-        dispatch(sendFeedback({ id: id, feedback: feedback }))
+        dispatch(sendFeedback({ roomId: id, content: feedback, userId: user.UserId }))
     };
     const [selectedDateRange, setSelectedDateRange] = useState({
         startDate: new Date(),
@@ -106,11 +108,17 @@ const Details = () => {
                             </div>
                             <div className="flex flex-row py-5">
                                 <div className="w-16 h-16 rounded-full object-cover">
-                                    <img src="https://static.vecteezy.com/system/resources/previews/002/002/257/non_2x/beautiful-woman-avatar-character-icon-free-vector.jpg" alt="" />
+                                    <img  className=" object-cover w-[70px] h-[70px] rounded-full"
+                                        src={
+                                            detail?.user?.profile?.avatarUrl ||
+                                            "https://static.vecteezy.com/system/resources/previews/002/002/257/non_2x/beautiful-woman-avatar-character-icon-free-vector.jpg"
+                                        }
+                                        alt="avatar"
+                                    />
                                 </div>
                                 <div className="flex px-5 flex-col justify-center">
                                     <h1 className="font-semibold">Owner home/Person create: {detail?.user?.profile?.fullName}</h1>
-                                    <h2> Super host 4 years of experience welcoming guests</h2>
+                                    <h2>Address: {detail?.user?.profile?.address}</h2>
                                 </div>
                             </div>
                             <div className="border border-gray-200 w-full"></div>
@@ -192,7 +200,7 @@ const Details = () => {
 
                                 </div>
                                 <div className="flex items-center justify-center">
-                                    <button className="flex py-3 px-8 border border-none justify-center items-center w-full rounded-2xl bg-primary text-white"  onClick={() => { handleSubmit()}}>
+                                    <button className="flex py-3 px-8 border border-none justify-center items-center w-full rounded-2xl bg-primary text-white" onClick={() => { handleSubmit() }}>
                                         Booking
                                     </button><i className="fas fa-eye  ms-2"></i>
                                 </div>
