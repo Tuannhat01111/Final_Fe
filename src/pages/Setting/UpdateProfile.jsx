@@ -153,8 +153,7 @@ const UpdateProfile = () => {
                     </div>
                     <div className="flex flex-col lg:w-2/3">
                         <p className="italic text-gray-600 mb-6">
-                            *Hãy dành ít phút để cập nhật đầy đủ thông tin hồ sơ cá nhân của bạn. Việc này không chỉ giúp chúng tôi hỗ trợ bạn tốt hơn mà còn nâng cao độ tin cậy của tài khoản khi đặt phòng, gửi phản hồi, hoặc tương tác với chủ phòng. Thông tin rõ ràng và chính xác cũng giúp quá trình xác nhận và thanh toán diễn ra suôn sẻ hơn. Cảm ơn bạn đã hợp tác!*
-                        </p>
+                        Please take a few minutes to update your full personal profile information. This will not only help us assist you better but also enhance the reliability of your account when booking rooms, sending feedback, or interacting with property owners. Clear and accurate information will also ensure a smoother verification and payment process. Thank you for your cooperation!                        </p>
 
 
                         <div class="sm:col-span-2 h-full lg:pt-3">
@@ -165,7 +164,7 @@ const UpdateProfile = () => {
                                     value={description}
                                     onChange={handleEditorChange}
                                     className="editor-input h-full editor-quill"
-                                    style={{ borderRadius: 5, height: "200px", marginBottom: "50px" }}
+                                    style={{ borderRadius: 5, height: "100px", marginBottom: "50px" }}
                                 />
                             </div>
 

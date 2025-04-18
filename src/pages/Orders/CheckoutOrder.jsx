@@ -69,10 +69,11 @@ const CheckoutOrder = () => {
                                 <h1 className="py-2 font-semibold text-2xl">Type of accommodation service</h1>
                                 <div className="grid grid-cols-2">
                                     <div className="flex flex-row items-center">
-                                        <h1 >Phân loại: {detail?.category?.name}</h1>
+                                        <h1><span className="font-bold">Category:</span> {detail?.category?.name}</h1>
                                     </div>
+
                                     <div className="flex flex-row items-center">
-                                        <h1 className="px-4">Mô tả phân loại:  {detail?.category?.description}</h1>
+                                        <h1 className="px-4"><span className="font-bold">Description of category:</span>   {detail?.category?.description}</h1>
                                     </div>
                                 </div>
                             </div>
@@ -104,7 +105,7 @@ const CheckoutOrder = () => {
                                 className=
                                 "hidden w-[80%] overflow-hidden overflow-y-auto lg:flex flex-col border border-gray-200  py-4 px-4 rounded-lg shadow-2xl sm:max-h-[35vh]  lg:max-h-[90vh] object-cover"
                             >
-                            
+
                                 <div className="flex flex-row justify-around items-center">
                                     <h2 className="font-semibold">Start Date </h2>
                                     <h2 className="font-semibold">End Date </h2>
@@ -125,14 +126,14 @@ const CheckoutOrder = () => {
                                     <h2 className=" text-lg">${location?.state?.totalPrice} </h2>
 
                                 </div>
-                        
+
                                 <div className="border border-gray-200 w-full"></div>
                                 <div className="flex py-2 justify-between">
                                     <h1 className="font-bold text-xl">Total: </h1>
                                     <h2 className="font-bold text-xl">$ {location?.state?.totalPrice + (location?.state?.totalPrice / 10)}</h2>
                                 </div>
                                 <div className="flex py-2 justify-between mb-10">
-                                <p><i>Please complete the payment as instructed to confirm your booking.</i> We support bank transfers, e-wallets, and credit cards. <i>All transactions are secure and encrypted.</i> If you encounter any issues, feel free to send feedback or contact the host for assistance.</p>
+                                    <p><i>Please complete the payment as instructed to confirm your booking.</i> We support bank transfers, e-wallets, and credit cards. <i>All transactions are secure and encrypted.</i> If you encounter any issues, feel free to send feedback or contact the host for assistance.</p>
                                 </div>
                                 <div>
 

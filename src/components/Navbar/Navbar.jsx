@@ -1,9 +1,7 @@
 import { AppBar, Badge, IconButton, Menu, TextField, Toolbar } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { FaAirbnb } from "react-icons/fa";
-import { IoIosSearch } from "react-icons/io";
-import { Link } from "react-router";
-import UserMenu from "./UserMenu/UserMenu";
+import { FaHotel } from "react-icons/fa";
+ import UserMenu from "./UserMenu/UserMenu";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import MenuItem from "./UserMenu/MenuItem";
@@ -116,9 +114,9 @@ const Navbar = () => {
             }}
             className="flex flex-row items-center cursor-pointer sm:ml-4 md:ml-6 lg:ml-16 "
           >
-            <FaAirbnb
+            <FaHotel
               className="font-semibold transform rotate-180 cursor-pointer"
-              color="#F5385D"
+              color="#385df5"
               size={40}
             />
             <h1 className="text-primary text-lg font-semibold font-circular pl-3">
@@ -129,7 +127,7 @@ const Navbar = () => {
             <div className="h-[48px]  lg:h-[64] flex flex-row items-center justify-between border rounded-full">
               <div className="hidden lg:block">
                 <div className="flex flex-row items-center justify-between">
-                  <div className="cursor-pointer w-[250px] h-[48px] lg:h-[64] px-8 flex flex-col justify-center rounded-full hover:bg-gray-100">
+                  <div className="cursor-pointer w-[250px] h-[48px] lg:h-[64] px-8 flex flex-col justify-center rounded-full">
                     <TextField
                       fullWidth
                       variant="standard"
@@ -150,14 +148,7 @@ const Navbar = () => {
                 </div>
               </div>
 
-              <Link
-                to={"/list"}
-                className="p-2 h-10 w-10 flex justify-center items-center rounded-full bg-primary lg:mr-2 cursor-pointer"
-              >
-                <div className="cursor-pointer p-2 lg:p-4 bg-airbnb hover:bg-airbnb-dark transition rounded-full text-white">
-                  <IoIosSearch size={24} />
-                </div>
-              </Link>
+             
             </div>
           </div>
           <UserMenu />

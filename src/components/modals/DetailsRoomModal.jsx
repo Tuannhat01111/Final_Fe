@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { closeDetails, openDetails } from "../../redux/modal/modalSlice";
-import { Button, Modal } from 'antd';
+import {  Modal } from 'antd';
 import { useEffect } from "react";
 import { getRoomById } from "../../redux/room/roomThunks";
 

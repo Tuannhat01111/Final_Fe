@@ -8,8 +8,7 @@ const axiosClient = axios.create({
 });
 export const getProfileByToken = createAsyncThunk('profile/getProfileByToken', async(_, thunkApi)=>{
     try {
-        const reponse = await http.get('api/Profiles')
-        return reponse
+        return await http.get('api/Profiles')
     } catch (error) {
         thunkApi.dispatch(openMessage({message:"Get Profile Failed!", notificationType: 'error'}))
         return thunkApi.rejectWithValue(error)
@@ -18,8 +17,7 @@ export const getProfileByToken = createAsyncThunk('profile/getProfileByToken', a
 
 export const getProfileByUserID = createAsyncThunk('profile/getProfileByUserID', async(data, thunkApi)=>{
     try {
-        const reponse = await http.get(`api/Profiles/${data}`)
-        return reponse
+        return await http.get(`api/Profiles/${data}`)
     } catch (error) {
         thunkApi.dispatch(openMessage({message:"Get Profile Failed!", notificationType: 'error'}))
         return thunkApi.rejectWithValue(error)
@@ -30,7 +28,6 @@ export const updateProfile = createAsyncThunk('profile/updateProfile', async(dat
     const {id , profile} = data
     try {
         const reponse = await http.put(`api/Profiles/${id}`,profile)
-
         thunkApi.dispatch(openMessage({message:"Update Success!", notificationType: 'success'}))
         return reponse
     } catch (error) {

@@ -1,4 +1,3 @@
-import { ExclamationCircleFilled } from '@ant-design/icons';
 import React, { useEffect, useState } from "react";
 import { Button, Modal } from 'antd';
 import { useDispatch, useSelector } from "react-redux";
@@ -8,7 +7,7 @@ import { createCategory, deleteCategory, getAllCategory, getCategoryId, updateCa
 import "./ManageCategory.css"
 import { MdDeleteForever } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
-const { confirm } = Modal;
+
 const validationSchema = yup.object({
     name: yup.string().required("Name is required"),
     description: yup.string().required("description is required"),
@@ -70,8 +69,6 @@ const ManageCategories = () => {
 
         if (confirmed) {
             dispatch(deleteCategory(id));
-        } else {
-            console.log('Cancel');
         }
     };
 
@@ -85,11 +82,17 @@ const ManageCategories = () => {
 
     return (
         <>
-            <div className="max-h-[94vh] overflow-hidden overflow-y-auto w-screen bg-[#222b3c]">
+            <div className="max-h-[94vh] overflow-hidden overflow-y-auto w-screen bg-[#ffffff]">
                 <div className="max-w-6xl p-4 mx-auto">
                     <div className="flex justify-between">
-                        <h1 className="text-4xl font-semibold text-white">Manager Category</h1>
-                        <Button className="text-white" onClick={() => setModal2Open(true)}>Create Category</Button>
+                        <h1 className="text-4xl font-semibold text-dark">Manage Categories</h1>
+                        <button
+                                className="max-w-[20%] bg-blue-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full w-full"
+                                onClick={() => setModal2Open(true)}
+                                type="submit"
+                            >
+                                Create Category
+                            </button>
                         <Modal
                             title="Create Category"
                             centered

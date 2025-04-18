@@ -5,7 +5,7 @@ import { getProfileByToken, updateProfile, uploadAvatar, getProfileByUserID } fr
 const initialState ={
     loading: false,
     error: '',
-    profile: []
+    profile: {}
 }
 
 

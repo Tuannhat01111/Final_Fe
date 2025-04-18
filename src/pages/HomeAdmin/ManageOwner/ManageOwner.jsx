@@ -3,11 +3,11 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllStore, bandHotelOwner, activeHotelOwner } from '../../../redux/auth/authThunks';
 import '../ManageUser/User.scss';
-const { Column, ColumnGroup } = Table;
+const { Column } = Table;
 
 const ManagerOwner = () => {
     const dispatch = useDispatch()
-    const data = useSelector((state) => state.auth.store)
+    const data = useSelector((state) => state.auth.stores)
 
     const activeHotelOwnerButton = (id, isBanned) =>{
             if(isBanned === true){
@@ -21,9 +21,9 @@ const ManagerOwner = () => {
     },[])
     return (
         <>
-            <div className='flex flex-col w-full bg-[#222b3c] '>
+            <div className='flex flex-col w-full bg-[#ffffff] '>
                 <div className='px-6 py-8' >
-                    <h1 className='text-white text-3xl font-bold'> Manager Owner Hotel</h1>
+                    <h1 className='text-dark text-3xl font-bold'> Manage Owner Hotels</h1>
                 </div>
                 <div className='flex w-full px-6'>
        

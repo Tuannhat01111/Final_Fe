@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { FaStar } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { getRoomById, sendFeedback } from "../../redux/room/roomThunks";
@@ -12,13 +11,12 @@ import { jwtDecode } from "jwt-decode";
 
 const Details = () => {
     const dispatch = useDispatch()
-    const user = null
+    let user = null
     const { id } = useParams()
     const { detail } = useSelector((state) => state.room)
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
     if (isLoggedIn) {
-        const user = jwtDecode(localStorage.getItem('token'))
-
+        user = jwtDecode(localStorage.getItem('token'))
     }
 
     const navigate = useNavigate()
@@ -97,10 +95,11 @@ const Details = () => {
                                 <h1 className="py-2 font-semibold text-2xl">Type of accommodation service</h1>
                                 <div className="grid grid-cols-2">
                                     <div className="flex flex-row items-center">
-                                        <h1 >Phân loại: {detail?.category?.name}</h1>
+                                        <h1><span className="font-bold">Category:</span> {detail?.category?.name}</h1>
                                     </div>
+
                                     <div className="flex flex-row items-center">
-                                        <h1 className="px-4">Mô tả phân loại:  {detail?.category?.description}</h1>
+                                        <h1 className="px-4"><span className="font-bold">Description of category:</span>   {detail?.category?.description}</h1>
                                     </div>
                                 </div>
                             </div>
@@ -117,7 +116,7 @@ const Details = () => {
                                     />
                                 </div>
                                 <div className="flex px-5 flex-col justify-center">
-                                    <h1 className="font-semibold">Owner home/Person create: {detail?.user?.profile?.fullName}</h1>
+                                    <h1 className="font-semibold">Owner home: {detail?.user?.profile?.fullName}</h1>
                                     <h2>Address: {detail?.user?.profile?.address}</h2>
                                 </div>
                             </div>
@@ -148,19 +147,19 @@ const Details = () => {
                                     </div>
                                 </div>
                                 <div className="flex w-full lg:w-2/4 flex-col lg:ml-10">
-                                <div className="flex items-center justify-center border-r border-gray-400">
-                                    <img className="object-cover h-40" loading="lazy" src="https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/78b7687c-5acf-4ef8-a5ea-eda732ae3b2f.png" />
+                                    <div className="flex items-center justify-center  ">
+                                        <img className="object-cover h-40" loading="lazy" src="https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/78b7687c-5acf-4ef8-a5ea-eda732ae3b2f.png" />
 
-                                    <h1 className="text-center text-6xl font-bold"> 5.0</h1>
-                                    <img className="object-cover h-40" loading="lazy" src="https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/b4005b30-79ff-4287-860c-67829ecd7412.png" />
-                                </div>
-                                <div className="flex flex-col items-center justify-center gap-4">
-                                    <h1 className="text-3xl font-bold text-center">Guest Is Like</h1>
-                                    <p className="text-xl text-gray-400 text-center">One of the most popular homes on Airbnb based on ratings, reviews, and trust</p>
+                                        <h1 className="text-center text-6xl font-bold"> 5.0</h1>
+                                        <img className="object-cover h-40" loading="lazy" src="https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/b4005b30-79ff-4287-860c-67829ecd7412.png" />
+                                    </div>
+                                    <div className="flex flex-col items-center justify-center gap-4">
+                                        <h1 className="text-3xl font-bold text-center">Guest Is Like</h1>
+                                        <p className="text-xl text-gray-400 text-center">One of the most popular homes on Airbnb based on ratings, reviews, and trust</p>
+                                    </div>
                                 </div>
                             </div>
-                            </div>
-                          
+
                             <div className="border border-gray-200 w-full"></div>
                             <div className="hidden sm:flex justify-center flex-col py-4 w-full ">
                                 <div>
@@ -248,7 +247,7 @@ const Details = () => {
                                     </div>
                                     <div className="flex flex-col">
                                         <h2 className="text-lg font-medium">{item.userName}</h2>
-                                        <p className="text-gray-400">Active two year ago</p>
+                                        <p className="text-gray-400">{detail.country}</p>
                                     </div>
                                 </div>
                                 <div>

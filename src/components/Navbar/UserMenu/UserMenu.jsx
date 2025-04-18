@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
-
 import { useDispatch, useSelector } from "react-redux";
 import { openLogin, openRegister } from "../../../redux/Modal/ModalSlice";
 import MenuItem from "./MenuItem";

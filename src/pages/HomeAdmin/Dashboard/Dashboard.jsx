@@ -1,19 +1,17 @@
 import ChartBox from "../../../components/Chart/ChartBox";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { getAllRooms } from "../../../redux/Room/RoomThunks";
 import { getCountByMonth, getOrderByAdmin } from "../../../redux/Order/OrderThunks";
 import { getAllCategory, getAllCategoryForAdmin } from "../../../redux/Category/CategoryThunks";
-import { getAllStore, getAllUser, getTopDeals } from "../../../redux/Auth/AuthThunks";
+import { getAllStore, getAllUser } from "../../../redux/Auth/AuthThunks";
 
 const Dashboard = () => {
     const dispatch = useDispatch()
-    const { data, store, topDeals } = useSelector((state) => state.auth)
+    const { users, stores } = useSelector((state) => state.auth)
     const rooms = useSelector((state) => state.room.rooms)
     const orders = useSelector((state) => state.order.data)
-    const countByMonth = useSelector((state) => state.order.countByMonth)
     const categoriesChart = useSelector((state) => state.category.categoriesChart)
 
     useEffect(() => {
@@ -21,36 +19,18 @@ const Dashboard = () => {
         dispatch(getAllStore())
         dispatch(getAllRooms({ categoryId: '' }))
         dispatch(getOrderByAdmin())
-        dispatch(getTopDeals())
         dispatch(getCountByMonth())
         dispatch(getAllCategoryForAdmin())
         dispatch(getAllCategory())
     }, [])
     return (
         <>
-            <div className="w-full py-2 px-5 bg-[#222b3c] h-full overflow-y-auto  ">
+            <div className="w-full py-2 px-5 bg-[#ffffff] h-full overflow-y-auto  ">
                 <div className="grid grid-cols-1 mg:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4">
                     <div className="  grid grid-col-1 grid-row-2 gap-4 col-span-2 " >
                         <div className="p-5 rounded-10 border-2 border-solid border-[#384256]">
                             <div className="p-4">
-                                <h1 className="mb-5 text-2xl font-bold text-white">Top Deals</h1>
-                                <div>
-                                    {topDeals?.map((user) => (
-                                        <div key={user?.id} className="flex items-center justify-between mb-7">
-
-                                            <div className="flex items-center gap-5">
-
-                                                <img src={user?.profile?.avatarUrl} alt="" className="w-10 h-10 rounded-full object-cover " />
-
-                                                <div className="flex flex-col gap-1">
-                                                    <span className="text-sm font-semibold text-white">{user?.profile?.fullName}</span>
-                                                    <span className="text-xs hidden lg:block text-white">{user?.email}</span>
-                                                </div>
-                                            </div>
-                                           
-                                        </div>
-                                    ))}
-                                </div>
+                                <h1 className="mb-5 text-2xl font-bold text-dark">Welcome to Adminitrator</h1>
                             </div>
                         </div>
                         <div className="p-5 rounded-10 border-2 border-solid border-[#384256]">
@@ -71,10 +51,10 @@ const Dashboard = () => {
                         <div className="grid xl:grid-cols-2 grid-row-2 gap-4" >
                             <div className="p-5 rounded-10 border-2 border-solid border-[#384256] "  >
 
-                                <ChartBox props={chartBoxUser} data={{ title: "Total User", number: data?.length }} />
+                                <ChartBox props={chartBoxUser} data={{ title: "Total User", number: users?.length }} />
                             </div>
                             <div className="p-5 rounded-10 border-2 border-solid border-[#384256]" >
-                                <ChartBox props={chartBoxUser} data={{ title: "Total Owner", number: store?.length }} />
+                                <ChartBox props={chartBoxUser} data={{ title: "Total Owner", number: stores?.length }} />
                             </div>
                             <div className="p-5 rounded-10 border-2 border-solid border-[#384256]" >
                                 <ChartBox props={chartBoxUser} data={{ title: "Total Order", number: orders?.length }} />
@@ -93,7 +73,7 @@ const Dashboard = () => {
 export default Dashboard;
 
 export const chartBoxUser = {
-    color: "#8884d8",
+    color: "#000000",
     icon: "/userIcon.svg",
     title: "Total Users",
     number: "11.238",

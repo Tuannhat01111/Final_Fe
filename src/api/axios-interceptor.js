@@ -20,7 +20,6 @@ http.interceptors.request.use(
     return Promise.reject(error);
   }
 );
-// bỏ token vào header khi fe gọi be
 
 http.interceptors.response.use(
   async function (response) {
@@ -37,5 +36,3 @@ http.interceptors.response.use(
   }
 );
 export default http;
-
-// cắt giảm data trả về cho redux dễ dùng 

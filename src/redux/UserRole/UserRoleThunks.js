@@ -16,6 +16,7 @@ export const upgrateToOwnerStore = createAsyncThunk('userRole/upgrateToOwnerStor
 export const disableOwnerStore = createAsyncThunk('userRole/disableOwnerStore', async(_, thunkApi)=>{
     try {
         const reponse = await http.put('api/UserRoles/DisableOwnerStore')
+        thunkApi.dispatch(openMessage({message:"Updown To OwnerRoom Successful!", notificationType: 'success'}))
         return reponse
     } catch (error) {
         thunkApi.dispatch(openMessage({message:"DisableOwnerStore Failed!", notificationType: 'error'}))

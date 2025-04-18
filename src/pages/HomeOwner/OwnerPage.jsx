@@ -1,9 +1,8 @@
-import { Link,  Await, useLoaderData } from "react-router-dom";
+import { Link,  Await } from "react-router-dom";
 import { Suspense, useEffect } from "react";
 import ListRoomInHotelOwner from "./ListRoomInHotelOwner";
-import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllRooms, getRoomByOwnerHotel, getRoomOrdersStats } from "../../redux/room/roomThunks";
+import {  getRoomByOwnerHotel, getRoomOrdersStats } from "../../redux/room/roomThunks";
 import SpinLoading from "../../components/spin/Spin";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 

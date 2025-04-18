@@ -13,7 +13,6 @@ import ReactQuill from 'react-quill-new';
 
 const validationSchema = yup.object({
     name: yup.string().required("Name is required"),
-    // description: yup.string().required("description is required"),
     street: yup.string().required("street is required"),
     price: yup.number().required("price is required"),
 });

@@ -113,27 +113,28 @@ const CategorySlide = () => {
           } `}
       >
         <div className="flex overflow-hidden overflow-x-auto py-4 flex-row items-center md:items-start md:justify-start justify-center mx-2 px-4  sm:py-2  sm:px-6 gap-0 lg:gap-8 scrollable-div ">
-          {categories?.map((item, index) => {
-            const Icon = icons[index];
-            return (
-              <div className="flex" key={item?.id}>
-                <div
-                  className="flex flex-col w-32 sm:w-20 pl-2 h-full sm:h-16 border-b-2 border-b-transparent border-solid hover:border-b-2 hover:border-b-black hover:border-solid items-center "
-                  onClick={() => {
-                    handleClickCategory(item?.id);
-                  }}
-                >
-                  {Icon && <Icon className="pt-1" size={30} color="" />}
-                  <h1
-                    className={`${item?.id === activeCategory ? "" : ""
-                      } text-sm`}
-                  >
-                    {item?.name}
-                  </h1>
-                </div>
-              </div>
-            );
-          })}
+          <div className="w-full flex justify-center mt-4">
+            <div className="flex flex-wrap justify-center gap-22"> 
+              {categories?.map((item, index) => {
+                const Icon = icons[index];
+                return (
+                  <div className="flex" key={item?.id}>
+                    <div
+                      className={`flex flex-col w-32 sm:w-20 pl-2 h-full sm:h-16 
+              border-b-2 border-b-transparent border-solid 
+              hover:border-b-black hover:border-b-2 items-center cursor-pointer`}
+                      onClick={() => handleClickCategory(item?.id)}
+                    >
+                      {Icon && <Icon className="pt-1" size={30} />}
+                      <h1 className={`text-sm whitespace-nowrap`}>
+                        {item?.name}
+                      </h1>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </>

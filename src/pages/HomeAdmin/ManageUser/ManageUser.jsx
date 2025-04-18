@@ -1,4 +1,3 @@
-
 import { Button, Space, Table, Tag } from 'antd';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,7 +7,7 @@ const { Column } = Table;
 
 const ManagerUser = () => {
     const dispatch = useDispatch()
-    const {data} = useSelector((state) => state.auth)
+    const {users} = useSelector((state) => state.auth)
 
     const activeUserButton = (id, isBanned) =>{
         if(isBanned === true){
@@ -22,13 +21,13 @@ const ManagerUser = () => {
     },[])
     return (
         <>
-            <div className='flex flex-col w-full bg-[#222b3c] '>
+            <div className='flex flex-col w-full bg-[#ffffff] '>
                 <div className='px-6 py-8' >
-                    <h1 className='text-white text-3xl font-bold'> Manager User</h1>
+                    <h1 className='text-dark text-3xl font-bold'> Manage Users</h1>
                 </div>
                 <div className='flex w-full px-6'>
        
-                <Table dataSource={data}>
+                <Table dataSource={users}>
                 <Column title="Full Name" dataIndex={['profile', 'fullName']} key="profile.fullName" />
                     <Column title="Email" dataIndex="email" key="email" />
                     <Column title="Address" dataIndex={['profile', 'address']} key="profile.address" />

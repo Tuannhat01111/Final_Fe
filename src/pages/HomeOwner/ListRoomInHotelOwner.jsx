@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { IoPricetagOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";

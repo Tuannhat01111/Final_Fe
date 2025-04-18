@@ -5,7 +5,7 @@ const AdminNavbar = () => {
     <div className="flex bg-[#222b3c] w-[100%] p-5  items-center justify-between">
       <div className="flex items-center font-bold gap-[10px]">
         <FaAirbnb className="w-[26px] h-[26px] object-cover rounded-[50%] text-white"/>
-        <span className="text-white font-sans">EarthPnP</span>
+        <span className="text-white font-sans">DBNTravel</span>
       </div>
       <div className="flex items-center gap-5">
         <img src="/search.svg" alt="" className="hidden sm:flex " />

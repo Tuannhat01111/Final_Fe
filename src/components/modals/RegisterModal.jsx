@@ -7,9 +7,6 @@ import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { TextField } from "@mui/material";
 import { useFormik } from 'formik';
 import * as yup from "yup";
-import {
-  registerByGoogleAccount,
-} from "../../redux/auth/authThunks";
 
 const validationSchema = yup.object({
   email: yup.string().email().required("Email is required"),
@@ -19,16 +16,6 @@ const validationSchema = yup.object({
 
 const RegisterModal = () =>{
     const dispatch = useDispatch()
-    const handleSuccessRegister = (response) => {  
-        dispatch(
-          registerByGoogleAccount(
-            response.credential,
-           )
-        );
-    };
-    const handleErrorRegister = (error) => {
-      dispatch(error);
-    };
     const {isLoading} = useSelector((state)  => state.auth)
  
     const formik = useFormik({
@@ -113,17 +100,6 @@ const RegisterModal = () =>{
       const footerContent = (
         <div className="flex flex-col gap-4 mt-3">
           <hr />
-          <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
-          <div className="flex justify-center">
-            <GoogleLogin
-              onSuccess={handleSuccessRegister}
-                onError={handleErrorRegister  }
-              style={{ marginTop: "100px" }}
-              cookiePolicy={"single_host_origin"}
-              isSignedIn={true}
-            />
-            </div>
-          </GoogleOAuthProvider>
           <div className="text-neutral-500 text-center mt-4 font-light">
             <p>
               Already have an account?

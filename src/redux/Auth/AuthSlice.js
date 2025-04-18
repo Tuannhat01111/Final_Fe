@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { activeUser, bandUser,activeHotelOwner,bandHotelOwner, changePassword, getAllStore, getAllUser, getTopDeals, login, register, registerByGoogleAccount, resetPassword, loginByGoogleAccount, complain } from "./AuthThunks";
+import { activeUser, bandUser,activeHotelOwner,bandHotelOwner, changePassword, getAllStore, getAllUser, login, register, resetPassword, complain } from "./AuthThunks";
 import { jwtDecode } from "jwt-decode";
 import decodeTokenAndCheckExpiration from "../../api/decodeTokenAndCheckExpiration";
 
@@ -19,9 +19,9 @@ const initialState = {
     loading: false,
     error: '',
     token: [],
-    user: [],
-    data: [],
-    store: [],
+    user: {},
+    users: [],
+    stores: [],
     topDeals: []
 }
 
@@ -91,38 +91,6 @@ const authSlice = createSlice({
             state.loading = false
             state.error = action.payload
         })
-        builder.addCase(registerByGoogleAccount.pending, (state, action) => {
-            state.loading = true
-            state.error = ''
-        })
-        builder.addCase(registerByGoogleAccount.fulfilled, (state, action) => {
-            state.loading = false
-            state.token = action.payload.token
-            localStorage.setItem("token", action.payload.token)
-            state.isLoggedIn = true
-            state.error = ''
-        })
-        builder.addCase(registerByGoogleAccount.rejected, (state, action) => {
-            state.loading = false
-            state.error = action.payload
-        })
-
-        builder.addCase(loginByGoogleAccount.pending, (state, action) => {
-            state.loading = true
-            state.error = ''
-        })
-        builder.addCase(loginByGoogleAccount.fulfilled, (state, action) => {
-            state.loading = false
-            state.token = action.payload.token
-            localStorage.setItem("token", action.payload.token)
-            state.isLoggedIn = true
-            state.error = ''
-        })
-        builder.addCase(loginByGoogleAccount.rejected, (state, action) => {
-            state.loading = false
-            state.error = action.payload
-        })
-
         builder.addCase(resetPassword.pending, (state, action) => {
             state.loading = true
             state.error = ''
@@ -155,7 +123,7 @@ const authSlice = createSlice({
         })
         builder.addCase(getAllUser.fulfilled, (state, action) => {
             state.loading = false
-            state.data = action.payload
+            state.users = action.payload
             state.error = ''
         })
         builder.addCase(getAllUser.rejected, (state, action) => {
@@ -169,28 +137,13 @@ const authSlice = createSlice({
         })
         builder.addCase(getAllStore.fulfilled, (state, action) => {
             state.loading = false
-            state.store = action.payload
+            state.stores = action.payload
             state.error = ''
         })
         builder.addCase(getAllStore.rejected, (state, action) => {
             state.loading = false
             state.error = action.payload
         })
-
-        builder.addCase(getTopDeals.pending, (state, action) => {
-            state.loading = true
-            state.error = ''
-        })
-        builder.addCase(getTopDeals.fulfilled, (state, action) => {
-            state.loading = false
-            state.topDeals = action.payload
-            state.error = ''
-        })
-        builder.addCase(getTopDeals.rejected, (state, action) => {
-            state.loading = false
-            state.error = action.payload
-        })
-
         builder.addCase(bandUser.pending, (state, action) => {
             state.loading = true
             state.error = ''
@@ -199,7 +152,7 @@ const authSlice = createSlice({
             state.loading = false
             state.details = action.payload
             const { id } = action.payload;
-            const user = state.data.find((user) => user.id == id);
+            const user = state.users.find((user) => user.id == id);
             user.isBanned = true
             state.error = ''
         })
@@ -216,7 +169,7 @@ const authSlice = createSlice({
             state.loading = false
             state.details = action.payload
             const { id } = action.payload;
-            const user = state.data.find((user) => user.id == id);
+            const user = state.users.find((user) => user.id == id);
             user.isBanned = false
             state.error = ''
         })
@@ -232,7 +185,7 @@ const authSlice = createSlice({
             state.loading = false
             state.details = action.payload
             const { id } = action.payload;
-            const hotelOwner = state.store.find((hotelOwner) => hotelOwner.id == id);
+            const hotelOwner = state.stores.find((hotelOwner) => hotelOwner.id == id);
             hotelOwner.isBanned = true
             state.error = ''
         })
@@ -249,7 +202,7 @@ const authSlice = createSlice({
             state.loading = false
             state.details = action.payload
             const { id } = action.payload;
-            const hotelOwner = state.store.find((hotelOwner) => hotelOwner.id == id);
+            const hotelOwner = state.stores.find((hotelOwner) => hotelOwner.id == id);
             hotelOwner.isBanned = false
             state.error = ''
         })

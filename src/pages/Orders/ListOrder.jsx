@@ -7,7 +7,6 @@ import SpinLoading from "../../components/spin/Spin";
 import { getOrder } from "../../redux/order/orderThunks";
 import './ListOrder.css';
 import TextField from '@mui/material/TextField';
-import PaidIcon from '../../components/svg/PaidIcon';
 import { jwtDecode } from "jwt-decode";
 import { sendFeedback } from "../../redux/room/roomThunks";
 

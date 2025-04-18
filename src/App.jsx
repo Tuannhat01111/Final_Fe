@@ -20,14 +20,11 @@ import ToastNotification from './components/toast/ToastNotification';
 import CheckoutOrder from './pages/Orders/CheckoutOrder';
 import ListOrder from './pages/Orders/ListOrder';
 import ManagerOwner from './pages/HomeAdmin/ManageOwner/ManageOwner';
+import ManagerOrder from './pages/HomeAdmin/ManageOrder/ManageOrder';
 import PublicElement from './components/commonAuth/PublicElement';
 import HotelOwnerElement from './components/commonAuth/HotelOwnerElement';
 import AdminElement from './components/commonAuth/AdminElement';
 import ComplainModal from "./components/Modal/ComplainModal";
-
-
-
-
 
 function App() {
   const currentPath = window.location.pathname.split('/');
@@ -131,6 +128,14 @@ function App() {
             element={
               <AdminElement>
                 <ManagerUser />
+              </AdminElement>
+            }
+          />
+           <Route
+            path="orders"
+            element={
+              <AdminElement>
+                <ManagerOrder />
               </AdminElement>
             }
           />

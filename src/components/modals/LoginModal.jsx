@@ -6,10 +6,6 @@ import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import * as yup from "yup";
 import { useFormik } from 'formik';
 import { TextField } from "@mui/material";
-import {
-
-  loginByGoogleAccount,
-} from "../../redux/auth/authThunks";
 
 const validationSchema = yup.object({
   email: yup.string().email().required("Email is required"),
@@ -19,30 +15,6 @@ const validationSchema = yup.object({
 
 const LoginModal = () => {
   const dispatch = useDispatch()
-  const handleSuccessLogin = (response) => {
-    dispatch(
-      loginByGoogleAccount(
-        response.credential,
-      )   
-    );    
-    dispatch(closeLogin())
-  };
-  const handleErrorLogin = (error) => {
-    dispatch(error);
-  };
-  const { isLoading } = useSelector((state) => state.auth)
-  const formik = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-
-    },
-    validationSchema: validationSchema,
-    onSubmit: async (values) => {
-      await dispatch(login(values)).unwrap();
-      onClose();
-    }
-  });
 
   const open = useSelector((state) => state.modal.login)
   const onClose = () => {
@@ -96,17 +68,6 @@ const LoginModal = () => {
   const footerContent = (
     <div className="flex flex-col gap-4 mt-3">
       <hr />
-      <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
-        <div className="flex justify-center">
-          <GoogleLogin
-            onSuccess={handleSuccessLogin}
-            onError={handleErrorLogin}
-            style={{ marginTop: "100px" }}
-            cookiePolicy={"single_host_origin"}
-            isSignedIn={true}
-          />
-        </div>
-      </GoogleOAuthProvider>
       <div className="text-neutral-500 text-center mt-4 font-light">
         <p>
           Already have an account? 
