@@ -13,7 +13,7 @@ const DetailsChartModal = ({ id }) => {
     const onClose = () => {
         dispatch(closeDetailsChart())
     }
-    const details = useSelector((state) => state.room.details)
+    const detail = useSelector((state) => state.room.detail)
 
     useEffect(() => {
         dispatch(getRoomOrdersStatsById(id))
@@ -22,7 +22,7 @@ const DetailsChartModal = ({ id }) => {
     return (
         <>
             <Modal
-                title={details?.name}
+                title={detail?.name}
                 centered
                 open={open}
                 onCancel={() => onClose()}

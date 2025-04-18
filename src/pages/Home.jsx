@@ -26,7 +26,7 @@ const Home = () => {
     setFavorite(!favorite);
   };
   const dispatch = useDispatch()
-  const { room } = useSelector((state) => state.room)
+  const { rooms } = useSelector((state) => state.room)
 
   useEffect(() => {
       dispatch(getAllRooms())
@@ -39,7 +39,7 @@ const Home = () => {
       </div>
       <div className=" w-full sm:w-[90%] px-6 sm:mx-auto ">
         <div className=" pt-3  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8 transition-all duration-500 ">
-          {room?.map((item) => {
+          {rooms?.map((item) => {
             return (
               <RoomItem
                 key={item?.id}

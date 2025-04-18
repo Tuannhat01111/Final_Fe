@@ -11,7 +11,7 @@ const CheckoutOrder = () => {
     const location = useLocation()
     const navigate = useNavigate()
     const { id } = useParams()
-    const { details } = useSelector((state) => state.room)
+    const { detail } = useSelector((state) => state.room)
     const [totalPrice, setTotalPrice] = useState(parseInt(location?.state?.totalPrice));
 
     const handleCreateOrder = async () => {
@@ -37,12 +37,12 @@ const CheckoutOrder = () => {
                             <div className="aspect-square w-full ">
                                 <img
                                     className="aspect-square rounded-l-xl object-cover cursor-pointer h-full"
-                                    src={details?.roomImages?.[0]?.url}
+                                    src={detail?.roomImages?.[0]?.url}
                                     alt=""
                                 />
                             </div>
                             <div className="grid grid-cols-2 gap-2 ">
-                                {details?.roomImages?.map((item, index) => {
+                                {detail?.roomImages?.map((item, index) => {
                                     return (
                                         <div className="aspect-square cursor-pointer object-cover " key={item?.id}>
                                             <img
@@ -61,8 +61,8 @@ const CheckoutOrder = () => {
                     <div className="flex py-5 px-5 sm:px-0 flex-col sm:flex-row ">
                         <div className="flex sm:w-2/3 flex-col">
                             <div className="mb-6">
-                                <h1 className="font-semibold text-xl mb-4">{details?.name}</h1>
-                                <h2>{details?.street}</h2>
+                                <h1 className="font-semibold text-xl mb-4">{detail?.name}</h1>
+                                <h2>{detail?.street}</h2>
                             </div>
 
                             <div className="flex flex-row py-5">
@@ -70,14 +70,14 @@ const CheckoutOrder = () => {
                                     <img src="https://static.vecteezy.com/system/resources/previews/002/002/257/non_2x/beautiful-woman-avatar-character-icon-free-vector.jpg" alt="" />
                                 </div>
                                 <div className="flex px-5 flex-col justify-center">
-                                    <h1 className="text-2xl font-bold">Hoster By : {details?.user?.profile?.fullName}</h1>
-                                    <h2> Joined in November: {moment(details?.user?.profile?.createdAt).format('MM/DD/YYYY')}</h2>
+                                    <h1 className="text-2xl font-bold">Hoster By : {detail?.user?.profile?.fullName}</h1>
+                                    <h2> Joined in November: {moment(detail?.user?.profile?.createdAt).format('MM/DD/YYYY')}</h2>
                                 </div>
                             </div>
                             <div className="border border-gray-200 w-full"></div>
                             <div className="py-5">
                                 <h1 className="font-semibold pb-2">Description</h1>
-                                <div dangerouslySetInnerHTML={{ __html: details?.user?.profile?.description }}></div>
+                                <div dangerouslySetInnerHTML={{ __html: detail?.user?.profile?.description }}></div>
                             </div>
                         </div>
 

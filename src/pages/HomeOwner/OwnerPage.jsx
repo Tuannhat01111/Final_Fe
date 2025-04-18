@@ -9,7 +9,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 
 function OwnerPage() {
   const dispatch = useDispatch();
-  const rooms = useSelector((state) => state.room.room)
+  const rooms = useSelector((state) => state.room.rooms)
   const { dataChart } = useSelector((state) => state.room)
 
   useEffect(() => {

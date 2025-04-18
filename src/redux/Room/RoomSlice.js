@@ -6,8 +6,8 @@ import { createRoom, deleteRoom, getAllRooms, getRoomById, updateRoom, getRoomOr
 const initialState ={
     loading: false,
     error: '',
-    room: [],
-    details:{},
+    rooms: [],
+    detail:{},
     status: [],
     dataChart: [],
     dataRoom: {}
@@ -19,9 +19,8 @@ const roomSlice = createSlice({
     initialState,
     reducers:{
         filterByName: (state, action) => {
-            const data = state.room
-            state.room = data.filter((item) => item.name.toLowerCase().includes(action.payload.toLowerCase()))
-
+            const data = state.rooms
+            state.rooms = data.filter((item) => item.name.toLowerCase().includes(action.payload.toLowerCase()))
         }
     },
     extraReducers: builder=>{
@@ -31,7 +30,7 @@ const roomSlice = createSlice({
         })
         builder.addCase(getAllRooms.fulfilled, (state, action) =>{
             state.loading=false
-            state.room = action.payload
+            state.rooms = action.payload
             state.error = ''
         })
         builder.addCase(getAllRooms.rejected, (state,action) =>{
@@ -44,7 +43,7 @@ const roomSlice = createSlice({
         })
         builder.addCase(getRoomByOwnerHotel.fulfilled, (state, action) =>{
             state.loading=false
-            state.room = action.payload
+            state.rooms = action.payload
             state.error = ''
         })
         builder.addCase(getRoomByOwnerHotel.rejected, (state,action) =>{
@@ -83,7 +82,7 @@ const roomSlice = createSlice({
         })
         builder.addCase(getRoomById.fulfilled, (state, action) =>{
             state.loading=false
-            state.details = action.payload
+            state.detail = action.payload
             state.error = ''
         })
         builder.addCase(getRoomById.rejected, (state,action) =>{
@@ -97,7 +96,7 @@ const roomSlice = createSlice({
         })
         builder.addCase(createRoom.fulfilled, (state, action) =>{
             state.loading=false
-            state.room = [...state.room, action.payload]
+            state.rooms = [...state.rooms, action.payload]
             state.error = ''
         })
         builder.addCase(createRoom.rejected, (state,action) =>{
@@ -111,7 +110,7 @@ const roomSlice = createSlice({
         })
         builder.addCase(deleteRoom.fulfilled, (state, action) =>{
             state.loading=false
-            state.room = action.payload
+            state.rooms = action.payload
             state.error = ''
         })
         builder.addCase(deleteRoom.rejected, (state,action) =>{
@@ -125,7 +124,7 @@ const roomSlice = createSlice({
         })
         builder.addCase(updateRoom.fulfilled, (state, action) =>{
             state.loading=false
-            state.details = action.payload
+            state.detail = action.payload
             state.error = ''
         })
         builder.addCase(updateRoom.rejected, (state,action) =>{
@@ -151,7 +150,7 @@ const roomSlice = createSlice({
         })
         builder.addCase(sendFeedbackByEmail.fulfilled, (state, action) =>{
             state.loading=false
-            state.details = action.payload
+            state.detail = action.payload
             state.error = ''
         })
         builder.addCase(sendFeedbackByEmail.rejected, (state,action) =>{
@@ -164,7 +163,7 @@ const roomSlice = createSlice({
         })
         builder.addCase(deleteRoomImages.fulfilled, (state, action) =>{
             state.loading=false
-            state.room = action.payload
+            state.rooms = action.payload
             state.error = ''
         })
         builder.addCase(deleteRoomImages.rejected, (state,action) =>{

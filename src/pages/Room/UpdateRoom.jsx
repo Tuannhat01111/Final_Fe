@@ -30,7 +30,7 @@ const UpdateRoom = () => {
         dispatch(getRoomById({ id: id }))
         dispatch(getAllCategory())
     }, [])
-    const details = useSelector((state) => state.room.details)
+    const detail = useSelector((state) => state.room.detail)
     const user = jwtDecode(localStorage.getItem('token'))
     const formik = useFormik({
         initialValues: {
@@ -58,30 +58,30 @@ const UpdateRoom = () => {
     });
 
     useEffect(() => {
-        if (details) {
+        if (detail) {
             formik.setValues({
-                id: details.id || "",
-                name: details.name || "",
-                street: details.street || "",
-                country: details.country || "",
-                codeCountry: details.codeCountry || "",
-                city: details.city || "",
-                codeCity: details.codeCity || "",
-                description: details.description || "",
-                district: details.district || "",
-                email: details.email || "",
-                latitude: details.latitude || "",
-                longitude: details.longitude || "",
-                categoryId: details.categoryId || "",
-                files: Array.isArray(details.files) ? details.files : [],  // Ensuring it's an array
-                price: details.price || "",
+                id: detail.id || "",
+                name: detail.name || "",
+                street: detail.street || "",
+                country: detail.country || "",
+                codeCountry: detail.codeCountry || "",
+                city: detail.city || "",
+                codeCity: detail.codeCity || "",
+                description: detail.description || "",
+                district: detail.district || "",
+                email: detail.email || "",
+                latitude: detail.latitude || "",
+                longitude: detail.longitude || "",
+                categoryId: detail.categoryId || "",
+                files: Array.isArray(detail.files) ? detail.files : [],  // Ensuring it's an array
+                price: detail.price || "",
                 userId: user?.UserId,
             });
-            setDescription(details.description);
+            setDescription(detail.description);
 
-            setImagesUpload(details.roomImages);
+            setImagesUpload(detail.roomImages);
         }
-    }, [details]);
+    }, [detail]);
 
     const [selectedCountry, setSelectedCountry] = useState(Country.getAllCountries()[0] ? {
         label: `${Country.getAllCountries()[0].name} (${Country.getAllCountries()[0].isoCode})`,

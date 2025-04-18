@@ -11,7 +11,7 @@ import { getAllStore, getAllUser, getTopDeals } from "../../../redux/Auth/AuthTh
 const Dashboard = () => {
     const dispatch = useDispatch()
     const { data, store, topDeals } = useSelector((state) => state.auth)
-    const rooms = useSelector((state) => state.room.room)
+    const rooms = useSelector((state) => state.room.rooms)
     const orders = useSelector((state) => state.order.data)
     const countByMonth = useSelector((state) => state.order.countByMonth)
     const categoriesChart = useSelector((state) => state.category.categoriesChart)
