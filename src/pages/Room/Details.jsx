@@ -12,7 +12,7 @@ import moment from "moment";
 const Details = () => {
     const dispatch = useDispatch()
     const { id } = useParams()
-    const { details } = useSelector((state) => state.room)
+    const { detail } = useSelector((state) => state.room)
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
 
     const navigate = useNavigate()
@@ -34,7 +34,7 @@ const Details = () => {
         key: 'selection',
     });
 
-    const totalPrice = useTotalPrice(selectedDateRange, details?.price);
+    const totalPrice = useTotalPrice(selectedDateRange, detail?.price);
     const diffDay = calculateNumberOfDays(selectedDateRange?.startDate, selectedDateRange?.endDate)
 
     const handleDateChange = (selected) => {
@@ -47,9 +47,9 @@ const Details = () => {
             dispatch(openLogin())
             return
         }
-        navigate(`/order/${id}`, { state: { date: selectedDateRange, totalPrice: totalPrice, price: details?.price, diffDay: diffDay } })
+        navigate(`/order/${id}`, { state: { date: selectedDateRange, totalPrice: totalPrice, price: detail?.price, diffDay: diffDay } })
     }
-    const disabledDatesArray = details?.busyDates?.map(busyDate => new Date(busyDate));
+    const disabledDatesArray = detail?.busyDates?.map(busyDate => new Date(busyDate));
     return (
         <>
             <div className="sm:container mx-auto pt-10">
@@ -59,12 +59,12 @@ const Details = () => {
                             <div className="aspect-square w-full ">
                                 <img
                                     className="aspect-square rounded-l-xl object-cover cursor-pointer h-full "
-                                    src={details?.roomImages?.[0]?.url}
+                                    src={detail?.roomImages?.[0]?.url}
                                     alt=""
                                 />
                             </div>
                             <div className="grid grid-cols-2 gap-2 ">
-                                {details?.roomImages?.map((item, index) => {
+                                {detail?.roomImages?.map((item, index) => {
                                     return (
                                         <div className="aspect-square cursor-pointer object-cover " key={item?.id}>
                                             <img
@@ -83,8 +83,8 @@ const Details = () => {
                     <div className="flex py-5 px-5 sm:px-0 flex-col  lg:flex-row ">
                         <div className="flex w-full lg:w-2/3 flex-col">
                             <div className="mb-6">
-                                <h1 className="font-semibold text-xl mb-4">{details.name}</h1>
-                                <h2>{details.street}</h2>
+                                <h1 className="font-semibold text-xl mb-4">{detail.name}</h1>
+                                <h2>{detail.street}</h2>
                             </div>
                             <div className="py-5 px-2 border border-black rounded-xl grid grid-cols-3">
                                 <div className="flex items-center justify-center border-r border-gray-400">
@@ -109,14 +109,14 @@ const Details = () => {
                                     <img src="https://static.vecteezy.com/system/resources/previews/002/002/257/non_2x/beautiful-woman-avatar-character-icon-free-vector.jpg" alt="" />
                                 </div>
                                 <div className="flex px-5 flex-col justify-center">
-                                    <h1 className="font-semibold">Owner home/Person create: {details?.user?.profile?.fullName}</h1>
+                                    <h1 className="font-semibold">Owner home/Person create: {detail?.user?.profile?.fullName}</h1>
                                     <h2> Super host 4 years of experience welcoming guests</h2>
                                 </div>
                             </div>
                             <div className="border border-gray-200 w-full"></div>
                             <div className="py-5">
                                 <h1 className="font-semibold pb-2">Description</h1>
-                                <div dangerouslySetInnerHTML={{ __html: details?.description }}></div>
+                                <div dangerouslySetInnerHTML={{ __html: detail?.description }}></div>
                             </div>
 
                             <div className="border border-gray-200 w-full"></div>
@@ -124,10 +124,10 @@ const Details = () => {
                                 <h1 className="py-2 font-semibold text-2xl">Type of accommodation service</h1>
                                 <div className="grid grid-cols-2">
                                     <div className="flex flex-row items-center">
-                                        <h1 className="px-4"> {details?.category?.name}</h1>
+                                        <h1 className="px-4"> {detail?.category?.name}</h1>
                                     </div>
                                     <div className="flex flex-row items-center">
-                                        <h1 className="px-4">  {details?.category?.description}</h1>
+                                        <h1 className="px-4">  {detail?.category?.description}</h1>
                                     </div>
                                 </div>
                             </div>
@@ -135,11 +135,11 @@ const Details = () => {
                             <div className="border border-gray-200 w-full"></div>
                             <div className="flex flex-row py-5">
                                 <div className="w-16 h-16 rounded-full object-cover">
-                                    <img src={details?.user?.profile?.avatarUrl} alt="" />
+                                    <img src={detail?.user?.profile?.avatarUrl} alt="" />
                                 </div>
                                 <div className="flex px-5 flex-col justify-center">
-                                    <h1 className="text-2xl font-bold">Hoster By : {details?.user?.profile?.fullName}</h1>
-                                    <h2> Joined in November: {moment(details?.user?.profile?.createdAt).format('DD/MM/YYYY')}</h2>
+                                    <h1 className="text-2xl font-bold">Hoster By : {detail?.user?.profile?.fullName}</h1>
+                                    <h2> Joined in November: {moment(detail?.user?.profile?.createdAt).format('DD/MM/YYYY')}</h2>
 
                                 </div>
                             </div>
@@ -147,7 +147,7 @@ const Details = () => {
                                 <div className="flex w-full lg:w-2/4 flex-col">
                                     <div className="py-2">
                                         <h1 className="font-bold text-lg"> Introduction</h1>
-                                        <div dangerouslySetInnerHTML={{ __html: details?.user?.profile?.description }}></div>
+                                        <div dangerouslySetInnerHTML={{ __html: detail?.user?.profile?.description }}></div>
                                     </div>
                                 </div>
                                 <div className="flex w-full lg:w-2/4 flex-col lg:ml-40">
@@ -207,7 +207,7 @@ const Details = () => {
                                 "hidden w-[80%] lg:flex flex-col border border-gray-200 py-4 px-4 rounded-lg shadow-2xl sm:max-h-[90vh]  lg:max-h-[35vh] sm:sticky sm:top-20 lg:top-44 object-cover"
                             >
                                 <div className="flex flex-row items-center">
-                                    <h1 className="font-bold text-2xl">${details?.price}</h1>
+                                    <h1 className="font-bold text-2xl">${detail?.price}</h1>
                                     <h1>/night</h1>
                                 </div>
                                 <span className="py-2">
@@ -220,7 +220,7 @@ const Details = () => {
                                 </span>
 
                                 <div className="flex py-2 justify-between">
-                                    <h1 className="underline">${details?.price} x {diffDay} day</h1>
+                                    <h1 className="underline">${detail?.price} x {diffDay} day</h1>
                                     <h1>${totalPrice}</h1>
                                 </div>
 
@@ -253,7 +253,7 @@ const Details = () => {
                     </div>
                     <div className="border border-gray-200 w-full"></div>
                     <div className="grid grid-cols-2 gap-12">
-                        {details?.feedbacks?.map((item) => (
+                        {detail?.feedbacks?.map((item) => (
 
                             <div className="flex flex-col px-4 py-4 gap-4 w-4/5">
                                 <div className="flex flex-row gap-4 ">
