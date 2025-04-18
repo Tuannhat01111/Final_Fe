@@ -64,7 +64,6 @@ const profileSlice = createSlice({
         })
         builder.addCase(uploadAvatar.fulfilled, (state, action) =>{
             state.loading=false
-            state.profile = action.payload
             state.error = ''
         })
         builder.addCase(uploadAvatar.rejected, (state,action) =>{

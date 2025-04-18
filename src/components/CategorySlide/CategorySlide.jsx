@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getAllCategory, getCategoryId } from "../../redux/category/categoryThunks";
+import { getAllRooms } from "../../redux/room/roomThunks";
 
-import { getAllCategory } from "../../redux/category/categoryThunks";
 import {
   TbAnchor,
   TbBackpack,
@@ -77,8 +78,8 @@ const icons = [
 
 
 const CategorySlide = () => {
-      const dispatch = useDispatch();
-  
+  const dispatch = useDispatch();
+
   const [activeCategory, setActiveCategory] = useState(null);
   const [isAtTop, setIsAtTop] = useState(false);
   useEffect(() => {
@@ -90,22 +91,20 @@ const CategorySlide = () => {
       }
     };
 
-
-
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
- const { categories } = useSelector((state) => state.category)
+  const { categories } = useSelector((state) => state.category)
   useEffect(() => {
     dispatch(getAllCategory())
   }, [])
   const handleClickCategory = (id) => {
     setActiveCategory(id);
-    console.log("click Cateogyrt", id);
+    dispatch(getAllRooms({ categoryId: id }))
+
   };
   return (
     <>

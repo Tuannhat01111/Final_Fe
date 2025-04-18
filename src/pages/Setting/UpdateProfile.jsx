@@ -14,9 +14,8 @@ import './UpdateProfile.scss';
 
 const validationSchema = yup.object({
     fullName: yup.string().required("Name is required"),
-    description: yup.string().required("description is required"),
-    address: yup.string().required("address is required"),
-    phone: yup.string().required("phone is required"),
+    address: yup.string().required("Address is required"),
+    phone: yup.string().required("NUmber phone is required"),
 });
 
 const UpdateProfile = () => {
@@ -66,13 +65,23 @@ const UpdateProfile = () => {
 
     const [loading, setLoading] = useState(false);
 
-    const handleUploadAvatar = (event) => {
-        const file = event.fileList[0].originFileObj
+    const handleUploadAvatar = async (event) => {
+        const file = event.fileList[0].originFileObj;
         if (file) {
-            dispatch(uploadAvatar(file));
+            // Show the image immediately from the browser
+            setImageUrl(URL.createObjectURL(file));
+
+            // Dispatch uploadAvatar
+            await dispatch(uploadAvatar(file));
+
+            // Optional: wait for 1 second before fetching updated profile
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            // Get updated profile
             dispatch(getProfileByToken());
         }
     };
+
     const uploadButton = (
         <button style={{ border: 0, background: 'none' }} type="button">
             {loading ? <LoadingOutlined /> : <PlusOutlined />}
@@ -149,40 +158,31 @@ const UpdateProfile = () => {
                                     value={description}
                                     onChange={handleEditorChange}
                                     className="editor-input h-full editor-quill"
-                                    style={{ borderRadius: 5, height: "300px", marginBottom: "50px"  }}
-                                // style={{ height: "600px", marginBottom: "50px" }}
+                                    style={{ borderRadius: 5, height: "300px", marginBottom: "50px" }}
                                 />
                             </div>
 
                         </div>
-                        {/* <div className="flex justify-end mt-4">
+                       
+                        <div className="flex justify-center mt-12">
                             <Button
                                 type="submit"
                                 variant="outlined"
                                 onClick={formik.handleSubmit}
+                                style={{
+                                    border: 'none',
+                                    backgroundColor: '#079a9f',
+                                    color: 'white',
+                                    height: '70%'
+                                }}
                             >
                                 Save Change
                             </Button>
-                        </div> */}
- <div className="flex justify-center mt-12">
-                    <Button
-                        type="submit"
-                        variant="outlined"
-                        onClick={formik.handleSubmit}
-                        style={{
-                            border: 'none',
-                            backgroundColor: '#079a9f',
-                            color: 'white',
-                            height: '70%'
-                        }}
-                    >
-                        Save Change
-                    </Button>
-                </div>
+                        </div>
                     </div>
-                    
+
                 </div>
-               
+
             </div>
 
 
