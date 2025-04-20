@@ -31,7 +31,6 @@ const ListOrderInHotelOwner = () => {
             {data ? (
               <>
                 {data.map((item, index) => (
-                  <div>
                     <div className="flex flex-col sm:flex-row py-4 px-2 gap-4 mb-4 bg-[#F7F7F7]" key={item?.id}>
                       <div className=" flex items-center relative w-full sm:h-48 sm:w-48">
                         <img className=" object-cover sm:max-w-48 sm:max-h-48 rounded-xl" src={item?.room?.roomImages?.[0]?.url} alt="" />
@@ -60,7 +59,6 @@ const ListOrderInHotelOwner = () => {
                      
                       </div>
                     </div>
-                  </div>
                 ))}
               </>
             ) : (
