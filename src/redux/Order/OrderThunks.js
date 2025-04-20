@@ -21,6 +21,17 @@ export const getOrderByAdmin = createAsyncThunk('order/getOrderByAdmin', async (
     }
 })
 
+
+export const getOrderByHotelOwner = createAsyncThunk('order/getOrderByHotelOwner', async (data, thunkApi) => {
+    const { id } = data
+    try {
+        return await http.get(`api/Orders/GetOrdersForHotelOwner/${id}`)
+    } catch (error) {
+        thunkApi.dispatch(openMessage({ message: "Get Order Failed!", notificationType: 'error' }))
+        return thunkApi.rejectWithValue(error)
+    }
+})
+
 export const getCountByMonth = createAsyncThunk('order/getCountByMonth', async (_, thunkApi) => {
     try {
         return await http.get('api/Orders/GetOrderCountByMonth')

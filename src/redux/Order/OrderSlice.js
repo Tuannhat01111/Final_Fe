@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {  createOrderPaypal, getCountByMonth, getOrder, getOrderByAdmin, getOrderById, onApprove } from "./orderThunks";
+import {  createOrderPaypal, getCountByMonth, getOrder, getOrderByAdmin, getOrderById, onApprove, getOrderByHotelOwner } from "./orderThunks";
 
 
 
@@ -82,6 +82,20 @@ const profileSlice = createSlice({
             state.error = ''
         })
         builder.addCase(getOrderByAdmin.rejected, (state,action) =>{
+            state.loading= false
+            state.error = action.payload
+        })
+
+        builder.addCase(getOrderByHotelOwner.pending,(state,action)=>{
+            state.loading = true
+            state.error = ''
+        })
+        builder.addCase(getOrderByHotelOwner.fulfilled, (state, action) =>{
+            state.loading=false
+            state.data = action.payload
+            state.error = ''
+        })
+        builder.addCase(getOrderByHotelOwner.rejected, (state,action) =>{
             state.loading= false
             state.error = action.payload
         })

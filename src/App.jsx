@@ -19,6 +19,7 @@ import UpdateRoom from './pages/Room/UpdateRoom';
 import ToastNotification from './components/toast/ToastNotification';
 import CheckoutOrder from './pages/Orders/CheckoutOrder';
 import ListOrder from './pages/Orders/ListOrder';
+import ListOrderInHotelOwner from './pages/Orders/ListOrderInHotelOwner';
 import ManagerOwner from './pages/HomeAdmin/ManageOwner/ManageOwner';
 import ManagerOrder from './pages/HomeAdmin/ManageOrder/ManageOrder';
 import PublicElement from './components/commonAuth/PublicElement';
@@ -85,6 +86,14 @@ function App() {
           element={
             <PublicElement>
               <ListOrder />
+            </PublicElement>
+          }
+        />
+          <Route
+          path="/ordersByHotelOwner"
+          element={
+            <PublicElement>
+              <ListOrderInHotelOwner />
             </PublicElement>
           }
         />

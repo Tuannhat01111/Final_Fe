@@ -113,6 +113,12 @@ const UserMenu = () => {
                     onClick={() => navigate('/owner')}
                   />
                 )}
+                 {role == "Hotel Owner" && (
+                  <MenuItem
+                    label="Manage Orders By Owner"
+                    onClick={() => navigate('/ordersByHotelOwner')}
+                  />
+                )}
                 <MenuItem
                   label="My Orders"
                   onClick={() => navigate('/orders')}
