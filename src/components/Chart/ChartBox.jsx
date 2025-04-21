@@ -27,24 +27,6 @@ const ChartBox = ({ props, data }) => {
 
       </div>
       <div className="flex flex-[2_2_0%] flex-col justify-center">
-        <div className="w-full h-full">
-          <ResponsiveContainer width="99%" height="100%">
-            <LineChart data={props.chartData}>
-              <Tooltip
-                contentStyle={{ background: "transparent", border: "none" }}
-                labelStyle={{ display: "none" }}
-                position={{ x: 10, y: 70 }}
-              />
-              <Line
-                type="monotone"
-                dataKey={props.dataKey}
-                stroke={props.color}
-                strokeWidth={2}
-                dot={false}
-              />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
         <div className="flex flex-col text-right">
           <span
             className="font-bold text-base sm:text-lg md:text-xl "

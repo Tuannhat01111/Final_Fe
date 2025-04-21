@@ -68,16 +68,14 @@ const UpdateProfile = () => {
     const handleUploadAvatar = async (event) => {
         const file = event.fileList[0].originFileObj;
         if (file) {
-            // Show the image immediately from the browser
+            
             setImageUrl(URL.createObjectURL(file));
 
-            // Dispatch uploadAvatar
             await dispatch(uploadAvatar(file));
 
-            // Optional: wait for 1 second before fetching updated profile
+      
             await new Promise(resolve => setTimeout(resolve, 1000));
 
-            // Get updated profile
             dispatch(getProfileByToken());
         }
     };
