@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import AdminNavbar from '../../components/Navbar/AdminNavbar';
-import MenuAdmin from '../../components/Menu/MenuAdmin'
+import MenuAdmin from '../../components/Navbar/AdminMenu/MenuAdmin'
 
 const HomeAdmin = () => {
     return (

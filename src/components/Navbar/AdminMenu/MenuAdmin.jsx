@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { logOut } from "../../redux/Auth/AuthSlice";
+import { logOut } from "../../../redux/Auth/AuthSlice";
 import { useDispatch } from "react-redux";
 
 const MenuAdmin = () => {
@@ -28,7 +28,7 @@ const MenuAdmin = () => {
           <span>Manage Orders</span>
         </Link>
         <Link onClick={() => { logout() }} className="flex items-center gap-[10px] p-[10px] rounded-[5px] hover:bg-[#96b8fd]">
-          <span>Logout </span>
+          <span>Log out </span>
         </Link>
       </div>
     </div>

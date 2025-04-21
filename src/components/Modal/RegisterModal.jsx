@@ -118,7 +118,7 @@ const RegisterModal = () => {
     disabled={isLoading}
       isOpen={open}
       title="Register"
-      actionLabel="Sign In"
+      actionLabel="Sign Up"
       onClose={onClose}
       onSubmit={formik.handleSubmit}
       body={bodyContent}
