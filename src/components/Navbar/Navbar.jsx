@@ -8,7 +8,7 @@ import MenuItem from "./UserMenu/MenuItem";
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import { getAllRooms } from "../../redux/Room/RoomThunks";
+import { getAllRooms } from "../../redux/room/roomThunks";
 import { getProfileByToken } from "../../redux/Profile/ProfileThunks";
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);

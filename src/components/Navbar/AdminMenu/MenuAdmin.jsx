@@ -19,10 +19,10 @@ const MenuAdmin = () => {
           <span>Manage Categories</span>
         </Link>
         <Link to={`/admin/users`} className="flex items-center gap-[10px] p-[10px] rounded-[5px] hover:bg-[#96b8fd]">
-          <span>Manage User</span>
+          <span>Manage Users</span>
         </Link>
         <Link to={`/admin/owner`} className="flex items-center gap-[10px] p-[10px] rounded-[5px] hover:bg-[#96b8fd]">
-          <span>Manage Owner Hotel</span>
+          <span>Manage Owner Hotels</span>
         </Link>
         <Link to={`/admin/orders`} className="flex items-center gap-[10px] p-[10px] rounded-[5px] hover:bg-[#96b8fd]">
           <span>Manage Orders</span>
