@@ -148,10 +148,10 @@ const CreateRoom = () => {
                                             disablePortal
                                             id="combo-div-demo"
                                             options={categories}
-                                            getOptionLabel={(option) => option.name} // Chọn thuộc tính hiển thị là name của Category
-                                            getOptionSelected={(option, value) => option.id === value.id} // Chọn thuộc tính được chọn dựa trên id
-                                            onChange={handleCategoryChange} // Gọi hàm handleCategoryChange khi có sự kiện thay đổi Category
-                                            renderInput={(params) => <TextField {...params} variant="outlined" />} // Sử dụng TextField của Material-UI cho input
+                                            getOptionLabel={(option) => option.name} 
+                                            getOptionSelected={(option, value) => option.id === value.id}
+                                            onChange={handleCategoryChange} 
+                                            renderInput={(params) => <TextField {...params} variant="outlined" />} 
                                         />
                                     </div>
                                     <div class="w-full">
@@ -179,8 +179,8 @@ const CreateRoom = () => {
                                                 <TextField
                                                     {...params}
                                                     variant="outlined"
-                                                    error={formik.touched.country && Boolean(formik.errors.country)} // Check for error
-                                                    helperText={formik.touched.country && formik.errors.country} // Show error message
+                                                    error={formik.touched.country && Boolean(formik.errors.country)} 
+                                                    helperText={formik.touched.country && formik.errors.country} 
                                                 />
                                             )}
                                         />
@@ -203,8 +203,8 @@ const CreateRoom = () => {
                                                 <TextField
                                                     {...params}
                                                     variant="outlined"
-                                                    error={formik.touched.city && Boolean(formik.errors.city)} // Check if there's an error for city
-                                                    helperText={formik.touched.city && formik.errors.city} // Display the error message
+                                                    error={formik.touched.city && Boolean(formik.errors.city)} 
+                                                    helperText={formik.touched.city && formik.errors.city} 
                                                 />
                                             )}
                                         />

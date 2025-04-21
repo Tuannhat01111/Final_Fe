@@ -67,6 +67,7 @@ export const createRoom = createAsyncThunk('room/createRoom', async (data, thunk
     try {
         const { name, street, country, codeCountry, city, codeCity, description, district, email, userId, categoryId, files, price } = data
         const response1 = await http.post(`api/Rooms/`, { categoryId: categoryId, userId: userId, name: name, street: street, city: city, country: country, description: description, district: district, email: email, latitude: "123", longitude: "123", price: price })
+       
         const response2 = await http.get(`api/Rooms/PreSignUrlToUploadImage/${response1.id}/${data.files.length}`)
         for (let index = 0; index < response2.length; index++) {
             const reponse = await axiosClient.put(response2[index].preSignedUrl, data.files[index]);
