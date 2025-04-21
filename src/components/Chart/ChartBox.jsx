@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Line, LineChart, ResponsiveContainer, Tooltip } from "recharts";
 
 const ChartBox = ({ props, data }) => {
   return (

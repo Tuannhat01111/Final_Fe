@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { IoPricetagOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteRoom } from "../../redux/Room/RoomThunks";
-import DetailsRoomModal from "../../components/modals/DetailsRoomModal";
-import { openDetails, openDetailsChart } from "../../redux/modal/modalSlice";
-import DetailsChartModal from "../../components/modals/DetailsChartModal";
+import { deleteRoom } from "../../redux/room/roomThunks";
+import DetailsRoomModal from "../../components/Modal/DetailsRoomModal";
+import { openDetails, openDetailsChart } from "../../redux/Modal/ModalSlice";
+import DetailsChartModal from "../../components/Modal/DetailsChartModal";
 
 function ListRoomInHotelOwner({ rooms }) {
   const dispatch = useDispatch();

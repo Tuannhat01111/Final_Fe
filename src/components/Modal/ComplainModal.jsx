@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import { TextField } from "@mui/material";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
